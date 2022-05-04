@@ -18,6 +18,10 @@
 		EE14BED0281E48770073A210 /* SubwayAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BECF281E48770073A210 /* SubwayAppTests.swift */; };
 		EE14BEDA281E48770073A210 /* SubwayAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BED9281E48770073A210 /* SubwayAppUITests.swift */; };
 		EE14BEDC281E48770073A210 /* SubwayAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */; };
+		EE557624281FB49900C6D8C1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557623281FB49900C6D8C1 /* MainViewController.swift */; };
+		EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557625281FB4A100C6D8C1 /* SearchViewController.swift */; };
+		EEC3E16B2820ECBF00C4392F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E16A2820ECBF00C4392F /* Extensions.swift */; };
+		EEC4A2542822BAA1004BC0CD /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A2532822BAA1004BC0CD /* HalfModalPresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		EE14BED5281E48770073A210 /* SubwayAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubwayAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE14BED9281E48770073A210 /* SubwayAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITests.swift; sourceTree = "<group>"; };
 		EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EE557623281FB49900C6D8C1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		EE557625281FB4A100C6D8C1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EEC3E16A2820ECBF00C4392F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		EEC4A2532822BAA1004BC0CD /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
 		F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7965BDA99D81455AF8EB3E7 /* Pods-SubwayApp-SubwayAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SubwayApp-SubwayAppUITests/Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F953FA05838B88B942EE6810 /* Pods-SubwayAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayAppTests.release.xcconfig"; path = "Target Support Files/Pods-SubwayAppTests/Pods-SubwayAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,12 +132,14 @@
 		EE14BEB7281E48760073A210 /* SubwayApp */ = {
 			isa = PBXGroup;
 			children = (
+				EE557622281FB48600C6D8C1 /* Controller */,
 				EE14BEB8281E48760073A210 /* AppDelegate.swift */,
 				EE14BEBA281E48760073A210 /* SceneDelegate.swift */,
 				EE14BEBC281E48760073A210 /* ViewController.swift */,
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
 				EE14BEC6281E48770073A210 /* Info.plist */,
+				EEC3E16A2820ECBF00C4392F /* Extensions.swift */,
 			);
 			path = SubwayApp;
 			sourceTree = "<group>";
@@ -149,6 +159,24 @@
 				EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */,
 			);
 			path = SubwayAppUITests;
+			sourceTree = "<group>";
+		};
+		EE557622281FB48600C6D8C1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EEC4A2502822B953004BC0CD /* Search */,
+				EE557623281FB49900C6D8C1 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EEC4A2502822B953004BC0CD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EE557625281FB4A100C6D8C1 /* SearchViewController.swift */,
+				EEC4A2532822BAA1004BC0CD /* HalfModalPresentationController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		F703FAA519E4BB4BF556D710 /* Pods */ = {
@@ -402,9 +430,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */,
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
+				EEC3E16B2820ECBF00C4392F /* Extensions.swift in Sources */,
 				EE14BEBB281E48760073A210 /* SceneDelegate.swift in Sources */,
+				EE557624281FB49900C6D8C1 /* MainViewController.swift in Sources */,
+				EEC4A2542822BAA1004BC0CD /* HalfModalPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

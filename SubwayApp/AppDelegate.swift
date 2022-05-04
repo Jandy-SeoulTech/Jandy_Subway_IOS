@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * 이 부분에서 앱 처음 사용 시 rootViewController를 온보딩 ViewController로 바꾸면 됩니다.
          */
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = ViewController()
+        let navVC = UINavigationController(rootViewController: MainViewController())
+        window.rootViewController = navVC
+        //window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
         return true
