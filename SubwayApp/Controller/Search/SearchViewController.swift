@@ -24,7 +24,6 @@ class SearchViewController: UIViewController {
         $0.setImage(UIImage(), for: .search, state: .normal)
         $0.isTranslucent = true
         $0.barTintColor = .white
-        
         $0.placeholder = ""
         $0.tintColor = UIColor(hex: 0x205EFF)
         $0.searchTextField.backgroundColor = .white
@@ -34,8 +33,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        searchBar.delegate = self
+        dismissKeyboard()
         configureNavigationBar()
-        
     }
 }
 
@@ -50,8 +50,36 @@ extension SearchViewController {
         self.navigationItem.rightBarButtonItems = [selectButton, UIBarButtonItem(customView: searchBar)]
     }
     @objc func didTapComboBox() {
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
         let vc = HalfModalPresentationController()
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: false)
+    }
+}
+
+// MARK: UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    // Dismiss keyboard when tap outside view
+    func dismissKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action:#selector(dismissKeyboardTouchOutside))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    // Clear search bar and dismiss keyboard
+    @objc func dismissKeyboardTouchOutside() {
+        self.searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+    }
+    // Dismiss keyboard when click search button
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
     }
 }
