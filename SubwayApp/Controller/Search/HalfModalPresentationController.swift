@@ -12,20 +12,23 @@ import Then
 class HalfModalPresentationController: UIViewController {
     // MARK: Constatns
     private let dimmedAlpha = 0.3
-    private let defaultHeight: CGFloat = UIScreen.main.bounds.size.height * 0.7
+    private let defaultHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private let dismissibleHeight: CGFloat = 200
-    private let maximumContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.7
-    private var currentContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.7
+    private let maximumContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
+    private var currentContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
+    
     // Dynamic container constraint
     var containerViewHeightConstraint: NSLayoutConstraint?
     var containerViewBottomConstraint: NSLayoutConstraint?
     
+    private lazy var collectionView: UICollectionView! = nil
     private lazy var titleLabel = UILabel().then {
         $0.text = "호선"
         $0.font = .systemFont(ofSize: 20, weight: .bold)
         $0.numberOfLines = 0
         $0.textColor = UIColor(hex: 0x212121)
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.sizeToFit()
     }
     private lazy var dimmedView = UIView().then {
         $0.backgroundColor = UIColor(hex: 0x000000)
@@ -48,8 +51,7 @@ class HalfModalPresentationController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         setConstraints()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissModal))
-        dimmedView.addGestureRecognizer(tapGesture)
+        setupTapGesture()
         setupPanGesture()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +59,6 @@ class HalfModalPresentationController: UIViewController {
         animateShowDimmedView()
         animatePresentContainer()
     }
-    
 }
 
 // MARK: Configuration
@@ -100,8 +101,50 @@ extension HalfModalPresentationController {
             make.height.width.equalTo(25)
         }
         closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        configureCollectionView()
     }
-    
+}
+
+// MARK: Configure collection view
+extension HalfModalPresentationController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func configureLayout() -> UICollectionViewCompositionalLayout{
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                             heightDimension: .fractionalHeight(1.0)))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                                        heightDimension: .absolute(60)),
+                                                     subitem: item,
+                                                     count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: CGRect(x: 24,
+                                                        y: titleLabel.bounds.size.height + 36,
+                                                        width: UIScreen.main.bounds.size.width - 24,
+                                                        height: defaultHeight - titleLabel.bounds.size.height - 36), collectionViewLayout: configureLayout())
+        containerView.addSubview(collectionView)
+        collectionView.backgroundColor = UIColor(hex: 0xffffff)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(HalfModalCollectionViewCell.self, forCellWithReuseIdentifier: HalfModalCollectionViewCell.identifier)
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HalfModalCollectionViewCell.identifier,
+                                                            for: indexPath) as? HalfModalCollectionViewCell
+        else {
+            return UICollectionViewCell()
+        }
+        cell.configure(number: "1", name: "1호선")
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 16
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        animateDismissView()
+    }
 }
 
 // MARK: Animation
@@ -144,13 +187,20 @@ extension HalfModalPresentationController {
             self.view.layoutIfNeeded()
         }
     }
+}
+
+// MARK: Gesture handler
+extension HalfModalPresentationController {
+    // Tap gesture
+    func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissModal))
+        dimmedView.addGestureRecognizer(tapGesture)
+    }
     @objc func dismissModal() {
         animateDismissView()
     }
-}
-
-// MARK: Pan gesture handler
-extension HalfModalPresentationController {
+    
+    // Pan gesture
     func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self,
                                                 action: #selector(self.handlePanGesture(gesture:)))

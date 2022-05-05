@@ -20,6 +20,7 @@
 		EE14BEDC281E48770073A210 /* SubwayAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */; };
 		EE557624281FB49900C6D8C1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557623281FB49900C6D8C1 /* MainViewController.swift */; };
 		EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557625281FB4A100C6D8C1 /* SearchViewController.swift */; };
+		EE8A44162823B6310056A660 /* HalfModalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8A44152823B6310056A660 /* HalfModalCollectionViewCell.swift */; };
 		EEC3E16B2820ECBF00C4392F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC3E16A2820ECBF00C4392F /* Extensions.swift */; };
 		EEC4A2542822BAA1004BC0CD /* HalfModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A2532822BAA1004BC0CD /* HalfModalPresentationController.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EE557623281FB49900C6D8C1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EE557625281FB4A100C6D8C1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EE8A44152823B6310056A660 /* HalfModalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalCollectionViewCell.swift; sourceTree = "<group>"; };
 		EEC3E16A2820ECBF00C4392F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EEC4A2532822BAA1004BC0CD /* HalfModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalPresentationController.swift; sourceTree = "<group>"; };
 		F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,8 @@
 		EE14BEB7281E48760073A210 /* SubwayApp */ = {
 			isa = PBXGroup;
 			children = (
+				EE8A44172823B70D0056A660 /* Model */,
+				EE8A44142823B36B0056A660 /* View */,
 				EE557622281FB48600C6D8C1 /* Controller */,
 				EE14BEB8281E48760073A210 /* AppDelegate.swift */,
 				EE14BEBA281E48760073A210 /* SceneDelegate.swift */,
@@ -168,6 +172,29 @@
 				EE557623281FB49900C6D8C1 /* MainViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE8A44142823B36B0056A660 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE8A441A2823C1080056A660 /* Search */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EE8A44172823B70D0056A660 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EE8A441A2823C1080056A660 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EE8A44152823B6310056A660 /* HalfModalCollectionViewCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		EEC4A2502822B953004BC0CD /* Search */ = {
@@ -431,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */,
+				EE8A44162823B6310056A660 /* HalfModalCollectionViewCell.swift in Sources */,
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EEC3E16B2820ECBF00C4392F /* Extensions.swift in Sources */,
