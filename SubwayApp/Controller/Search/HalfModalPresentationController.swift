@@ -11,18 +11,20 @@ import Then
 
 class HalfModalPresentationController: UIViewController {
     // MARK: Constatns
-    private let dimmedAlpha = 0.3
+    private let dimmedAlpha: CGFloat = 0.3
     private let defaultHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private let dismissibleHeight: CGFloat = 200
     private let maximumContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private var currentContainerHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     
     // Dynamic container constraint
-    var containerViewHeightConstraint: NSLayoutConstraint?
-    var containerViewBottomConstraint: NSLayoutConstraint?
+    weak var containerViewHeightConstraint: NSLayoutConstraint?
+    weak var containerViewBottomConstraint: NSLayoutConstraint?
     
-    private lazy var collectionView: UICollectionView! = nil
-    private lazy var titleLabel = UILabel().then {
+    let model: HalfModalModel = HalfModalModel()
+    
+    private var collectionView: UICollectionView! = nil
+    private var titleLabel = UILabel().then {
         $0.text = "호선"
         $0.font = .systemFont(ofSize: 20, weight: .bold)
         $0.numberOfLines = 0
@@ -30,22 +32,24 @@ class HalfModalPresentationController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.sizeToFit()
     }
-    private lazy var dimmedView = UIView().then {
+    private var dimmedView = UIView().then {
         $0.backgroundColor = UIColor(hex: 0x000000)
         $0.alpha = 0.3
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private lazy var containerView = UIView().then {
+    private var containerView = UIView().then {
         $0.backgroundColor = UIColor(hex: 0xFFFFFF)
         $0.layer.cornerRadius = 16
+        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private lazy var closeButton = UIButton().then {
+    private var closeButton = UIButton().then {
         $0.setImage(UIImage(named: "xbtn-large"), for: .normal)
         $0.tintColor = UIColor(hex: 0x212121)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,14 +139,19 @@ extension HalfModalPresentationController: UICollectionViewDelegate, UICollectio
         else {
             return UICollectionViewCell()
         }
-        cell.configure(number: "1", name: "1호선")
+        let number: String = model.line[indexPath.row]
+        let name: String = model.name[indexPath.row]
+        let color: Int = model.color[indexPath.row]
+        cell.configure(number: number, name: name, color: color)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        return model.line.count
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        let dic: [String: String] = ["name": model.name[indexPath.row],"color": "\(model.color[indexPath.row])"]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "subway_line"), object: dic)
         animateDismissView()
     }
 }
@@ -150,17 +159,17 @@ extension HalfModalPresentationController: UICollectionViewDelegate, UICollectio
 // MARK: Animation
 extension HalfModalPresentationController {
     func animatePresentContainer() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = 0
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.containerViewBottomConstraint?.constant = 0
+            self?.view.layoutIfNeeded()
         }
     }
     func animateContainerHeight(_ height: CGFloat) {
-        UIView.animate(withDuration: 0.4) {
+        UIView.animate(withDuration: 0.4) { [weak self] in
             // Update container height
-            self.containerViewHeightConstraint?.constant = height
+            self?.containerViewHeightConstraint?.constant = height
             // Call this to trigger refresh constraint
-            self.view.layoutIfNeeded()
+            self?.view.layoutIfNeeded()
         }
         // Save current height
         currentContainerHeight = height
@@ -174,8 +183,8 @@ extension HalfModalPresentationController {
     func animateDismissView() {
         // hide blur view
         dimmedView.alpha = dimmedAlpha
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = 0
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.dimmedView.alpha = 0
         } completion: { _ in
             // once done, dismiss without animation
             self.dismiss(animated: false)
@@ -199,7 +208,6 @@ extension HalfModalPresentationController {
     @objc func dismissModal() {
         animateDismissView()
     }
-    
     // Pan gesture
     func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self,

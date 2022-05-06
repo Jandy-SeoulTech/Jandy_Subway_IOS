@@ -12,7 +12,7 @@ import Then
 class HalfModalCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "HalfModalCollectionViewCell"
     
-    private let numberLabel = UILabel().then {
+    private let numberLabel = PaddingLabel(padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)).then {
         $0.numberOfLines = 0
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.textColor = UIColor(hex: 0xffffff)
@@ -20,6 +20,7 @@ class HalfModalCollectionViewCell: UICollectionViewCell {
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = 14
         $0.layer.masksToBounds = true
+        $0.sizeToFit()
     }
     private let nameLabel = UILabel().then {
         $0.numberOfLines = 0
@@ -41,6 +42,7 @@ class HalfModalCollectionViewCell: UICollectionViewCell {
     }
     override func prepareForReuse() {
         numberLabel.text = nil
+        numberLabel.backgroundColor = .clear
         nameLabel.text = nil
     }
 }
@@ -48,17 +50,17 @@ class HalfModalCollectionViewCell: UICollectionViewCell {
 // MARK: Configure Cell
 extension HalfModalCollectionViewCell {
     // configure(with model: Model) 로 바꿔야함
-    func configure(number: String, name: String) {
+    func configure(number: String, name: String, color: Int) {
         numberLabel.text = number
+        numberLabel.backgroundColor = UIColor(hex: color)
         nameLabel.text = name
     }
     func configureCell() {
-        numberLabel.backgroundColor = UIColor(hex: 0x1F409B)
         numberLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview().offset(-15)
-            make.width.equalTo(28)
+            make.width.greaterThanOrEqualTo(28)
             make.height.greaterThanOrEqualTo(28)
         }
         nameLabel.snp.makeConstraints { make in

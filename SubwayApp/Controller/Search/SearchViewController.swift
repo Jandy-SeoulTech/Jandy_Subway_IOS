@@ -30,12 +30,37 @@ class SearchViewController: UIViewController {
         $0.searchTextField.textColor = UIColor(hex: 0x212121)
         $0.searchTextField.font = .systemFont(ofSize: 14, weight: .regular)
     }
+    private let lineLabel = UILabel().then {
+        $0.text = "1호선"
+        $0.textColor = UIColor(hex: 0x9E9E9E)
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.backgroundColor = .clear
+        $0.sizeToFit()
+    }
+    private let chevronImage = UIImageView().then {
+        $0.image = UIImage(systemName: "chevron.down")
+        $0.tintColor = UIColor(hex: 0x9E9E9E)
+        $0.backgroundColor = .clear
+    }
+    private var lineStateView = UIStackView().then {
+        $0.spacing = 7
+        $0.backgroundColor = UIColor(hex: 0xF4F4F4)
+        $0.alignment = .center
+        $0.axis = .horizontal
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 15)
+        $0.layer.cornerRadius = 15.5
+        $0.layer.masksToBounds = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         searchBar.delegate = self
         dismissKeyboard()
         configureNavigationBar()
+        configureLineStateView()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
     }
 }
 
@@ -48,6 +73,25 @@ extension SearchViewController {
         }
         selectButton.target = self
         self.navigationItem.rightBarButtonItems = [selectButton, UIBarButtonItem(customView: searchBar)]
+    }
+    func configureLineStateView() {
+        view.addSubview(lineStateView)
+        lineStateView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.height.equalTo(32)
+        }
+        lineStateView.addArrangedSubview(lineLabel)
+        lineStateView.addArrangedSubview(chevronImage)
+    }
+    @objc func changeLineLabel(_ notification : Notification) {
+        if let dic = notification.object as? [String: String] {
+            guard let name = dic["name"], let color = dic["color"] else { return }
+            self.lineLabel.text = name
+            self.lineStateView.backgroundColor = UIColor(hex: Int(color)!)
+            self.lineLabel.textColor = UIColor(hex: 0xffffff)
+            self.chevronImage.tintColor = UIColor(hex: 0xffffff)
+        }
     }
     @objc func didTapComboBox() {
         self.searchBar.text = ""
@@ -71,7 +115,6 @@ extension SearchViewController: UISearchBarDelegate {
     @objc func dismissKeyboardTouchOutside() {
         self.searchBar.resignFirstResponder()
     }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
