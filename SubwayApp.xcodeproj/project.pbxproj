@@ -18,7 +18,6 @@
 		EE14BED0281E48770073A210 /* SubwayAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BECF281E48770073A210 /* SubwayAppTests.swift */; };
 		EE14BEDA281E48770073A210 /* SubwayAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BED9281E48770073A210 /* SubwayAppUITests.swift */; };
 		EE14BEDC281E48770073A210 /* SubwayAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */; };
-		EE1E390328263F2B0004C92E /* SubwayMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E390228263F2B0004C92E /* SubwayMap.swift */; };
 		EE1E390528264A2E0004C92E /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E390428264A2E0004C92E /* SearchResultCollectionViewCell.swift */; };
 		EE557624281FB49900C6D8C1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557623281FB49900C6D8C1 /* MainViewController.swift */; };
 		EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE557625281FB4A100C6D8C1 /* SearchViewController.swift */; };
@@ -65,7 +64,6 @@
 		EE14BED5281E48770073A210 /* SubwayAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubwayAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE14BED9281E48770073A210 /* SubwayAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITests.swift; sourceTree = "<group>"; };
 		EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EE1E390228263F2B0004C92E /* SubwayMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayMap.swift; sourceTree = "<group>"; };
 		EE1E390428264A2E0004C92E /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE557623281FB49900C6D8C1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EE557625281FB4A100C6D8C1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				EE6739DF2824E0DA0058A702 /* SubwayLines.swift */,
-				EE1E390228263F2B0004C92E /* SubwayMap.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -478,7 +475,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE6739E02824E0DA0058A702 /* SubwayLines.swift in Sources */,
-				EE1E390328263F2B0004C92E /* SubwayMap.swift in Sources */,
 				EE557626281FB4A100C6D8C1 /* SearchViewController.swift in Sources */,
 				EE8A44162823B6310056A660 /* SubwayLinesCollectionViewCell.swift in Sources */,
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,

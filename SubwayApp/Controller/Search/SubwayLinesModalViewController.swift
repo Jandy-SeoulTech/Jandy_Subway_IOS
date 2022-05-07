@@ -75,6 +75,7 @@ extension SubwayLinesModalViewController {
         }
         view.addSubview(containerView)
         // Container view constraint
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
         }
@@ -132,12 +133,11 @@ extension SubwayLinesModalViewController: UICollectionViewDelegate, UICollection
         subwayLinesCollectionView.backgroundColor = UIColor(hex: 0xffffff)
         subwayLinesCollectionView.dataSource = self
         subwayLinesCollectionView.delegate = self
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         subwayLinesCollectionView.snp.makeConstraints { make in
-            make.leading.equalTo(24)
+            make.leading.equalTo(containerView.snp.leading)
             make.trailing.equalTo(containerView.snp.trailing)
             make.top.equalTo(titleLabel.snp.bottom).offset(11)
-            make.height.equalTo(containerView.snp.height)
+            make.bottom.equalTo(containerView.snp.bottom)
         }
         subwayLinesCollectionView.register(SubwayLinesCollectionViewCell.self,
                                 forCellWithReuseIdentifier: SubwayLinesCollectionViewCell.identifier)
@@ -174,6 +174,7 @@ extension SubwayLinesModalViewController {
             self?.view.layoutIfNeeded()
         }
     }
+    
     func animateContainerHeight(_ height: CGFloat) {
         UIView.animate(withDuration: 0.4) { [weak self] in
             // Update container height
@@ -186,8 +187,9 @@ extension SubwayLinesModalViewController {
     }
     func animateShowDimmedView() {
         dimmedView.alpha = 0
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = self.dimmedAlpha
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            guard let dimmedAlpha = self?.dimmedAlpha else { return }
+            self?.dimmedView.alpha = dimmedAlpha
         }
     }
     func animateDismissView() {
@@ -200,10 +202,11 @@ extension SubwayLinesModalViewController {
             self.dismiss(animated: false)
         }
         // hide main view by updating bottom constraint in animation block
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = self.defaultHeight
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let defaultHeight = self?.defaultHeight else { return }
+            self?.containerViewBottomConstraint?.constant = defaultHeight
             // call this to trigger refresh constraint
-            self.view.layoutIfNeeded()
+            self?.view.layoutIfNeeded()
         }
     }
 }

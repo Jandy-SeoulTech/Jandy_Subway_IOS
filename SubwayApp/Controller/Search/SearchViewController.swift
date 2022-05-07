@@ -31,7 +31,7 @@ class SearchViewController: UIViewController {
         $0.searchTextField.font = .systemFont(ofSize: 14, weight: .regular)
     }
     private let lineLabel = UILabel().then {
-        $0.text = "1호선"
+        $0.text = "호선 검색"
         $0.textColor = UIColor(hex: 0x9E9E9E)
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.backgroundColor = .clear
@@ -54,6 +54,12 @@ class SearchViewController: UIViewController {
     }
     private var searchResultCollectionView: UICollectionView! = nil
     
+    var patialText: String = ""
+    var filteredData: [String]!
+    // 임시 데이터
+    var model: [String] = ["가", "나", "가나", "가나다", "나다", "나다라", "다", "다라", "다라마",
+                          "라", "라마", "라마바", "마", "마바", "마바사"]
+    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +70,8 @@ class SearchViewController: UIViewController {
         configureLineStateView()
         configureSearchResultCollectionView()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
+        // Get data from data base
+        filteredData = model
     }
 }
 
@@ -111,13 +119,10 @@ extension SearchViewController {
         searchResultCollectionView.translatesAutoresizingMaskIntoConstraints = false
         searchResultCollectionView.snp.makeConstraints { make in
             make.top.equalTo(lineStateView.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(view.safeAreaLayoutGuide.snp.height).offset(-lineStateView.height)
-            
+            make.leading.trailing.bottom.equalToSuperview()
         }
-        searchResultCollectionView.register(SearchResultCollectionViewCell.self,
-                                            forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        searchResultCollectionView.register(SubwayLinesCollectionViewCell.self,
+                                            forCellWithReuseIdentifier: SubwayLinesCollectionViewCell.identifier)
     }
     // MARK: Event method
     @objc func changeLineLabel(_ notification : Notification) {
@@ -152,10 +157,9 @@ extension SearchViewController: UISearchBarDelegate {
         self.searchBar.resignFirstResponder()
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
+        filteredData = searchText.isEmpty ? model : model.filter({ $0.hasPrefix(searchText) })
+        patialText = searchText
+        searchResultCollectionView.reloadData()
     }
     // Dismiss keyboard when click search button
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -166,19 +170,25 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - CollectionView data source, delegate
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+        return filteredData.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SearchResultCollectionViewCell.identifier,
-            for: indexPath) as? SearchResultCollectionViewCell else {
+            withReuseIdentifier: SubwayLinesCollectionViewCell.identifier,
+            for: indexPath) as? SubwayLinesCollectionViewCell else {
                 return UICollectionViewCell()
             }
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(hex: 0xFF7A00)
+        if patialText.isEmpty {
+            cell.configure(number: "1", name: filteredData[indexPath.row], color: 0x009D3E)
         } else {
-            cell.backgroundColor = UIColor(hex: 0x443872)
+            cell.configure(number: "1", name: filteredData[indexPath.row], color: 0x009D3E, patial: patialText)
         }
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        // Send data to previous view controller
+        print(filteredData[indexPath.row])
+        navigationController?.popViewController(animated: true)
     }
 }

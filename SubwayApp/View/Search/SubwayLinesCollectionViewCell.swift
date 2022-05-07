@@ -44,6 +44,7 @@ class SubwayLinesCollectionViewCell: UICollectionViewCell {
         numberLabel.text = nil
         numberLabel.backgroundColor = .clear
         nameLabel.text = nil
+        nameLabel.textColor = UIColor(hex: 0x000000)
     }
 }
 
@@ -55,10 +56,23 @@ extension SubwayLinesCollectionViewCell {
         numberLabel.backgroundColor = UIColor(hex: color)
         nameLabel.text = name
     }
+    // Label 부분 색상 적용 함수
+    func configure(number: String, name: String, color: Int, patial: String) {
+        numberLabel.text = number
+        numberLabel.backgroundColor = UIColor(hex: color)
+        nameLabel.text = name
+        if let text = nameLabel.text {
+            let attributedString = NSMutableAttributedString(string: text)
+            attributedString.addAttribute(.foregroundColor,
+                                          value: UIColor(hex: 0x3162BC),
+                                          range: (text as NSString).range(of: patial))
+            nameLabel.attributedText = attributedString
+        }
+    }
     func configureCell() {
         numberLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(15)
             make.bottom.equalToSuperview().offset(-15)
             make.width.greaterThanOrEqualTo(28)
             make.height.greaterThanOrEqualTo(28)

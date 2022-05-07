@@ -9,4 +9,6 @@ import UIKit
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "SearchResultCollectionViewCell"
+    
+    
 }
