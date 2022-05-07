@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
     func configureNavigationBar() {
-        let backImage = UIImage(named: "CaretLeft")?.withAlignmentRectInsets(UIEdgeInsets(top: 0,
+        let backImage = UIImage(named: "chevron.left")?.withAlignmentRectInsets(UIEdgeInsets(top: 0,
                                                                                           left: -5,
                                                                                           bottom: 5,
                                                                                           right: 0))
