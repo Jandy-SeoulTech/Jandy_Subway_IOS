@@ -11,7 +11,7 @@ import Then
 
 class SearchViewController: UIViewController {
     private var selectButton = UIBarButtonItem().then {
-        $0.image = UIImage(named: "ComboBox")
+        $0.image = UIImage(named: "combo-box")
         $0.tintColor = UIColor(hex: 0x212121)
         $0.style = .plain
         $0.action = #selector(didTapComboBox)
@@ -38,8 +38,7 @@ class SearchViewController: UIViewController {
         $0.sizeToFit()
     }
     private let chevronImage = UIImageView().then {
-        $0.image = UIImage(systemName: "chevron.down")
-        $0.tintColor = UIColor(hex: 0x9E9E9E)
+        $0.image = UIImage(named: "default.chevron.down")
         $0.backgroundColor = .clear
     }
     private var lineStateView = UIStackView().then {
@@ -53,6 +52,9 @@ class SearchViewController: UIViewController {
         $0.layer.masksToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    private var searchResultCollectionView: UICollectionView! = nil
+    
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -60,11 +62,13 @@ class SearchViewController: UIViewController {
         dismissKeyboard()
         configureNavigationBar()
         configureLineStateView()
+        configureSearchResultCollectionView()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
     }
 }
 
 extension SearchViewController {
+    // MARK: Configuration
     func configureNavigationBar() {
         let selectButtonSize:CGFloat = selectButton.image?.size.width ?? 45
         let backbuttonSize:CGFloat = self.navigationController?.navigationBar.backIndicatorImage?.size.width ?? 32
@@ -84,25 +88,57 @@ extension SearchViewController {
         lineStateView.addArrangedSubview(lineLabel)
         lineStateView.addArrangedSubview(chevronImage)
     }
+    func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalHeight(1.0)))
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(60)),
+            subitem: item,
+            count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    func configureSearchResultCollectionView() {
+        searchResultCollectionView = UICollectionView(frame: .zero,
+                                                collectionViewLayout: configureCollectionViewLayout())
+        view.addSubview(searchResultCollectionView)
+        searchResultCollectionView.backgroundColor = UIColor(hex: 0xffffff)
+        searchResultCollectionView.dataSource = self
+        searchResultCollectionView.delegate = self
+        searchResultCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        searchResultCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(lineStateView.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(view.safeAreaLayoutGuide.snp.height).offset(-lineStateView.height)
+            
+        }
+        searchResultCollectionView.register(SearchResultCollectionViewCell.self,
+                                            forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+    }
+    // MARK: Event method
     @objc func changeLineLabel(_ notification : Notification) {
         if let dic = notification.object as? [String: String] {
             guard let name = dic["name"], let color = dic["color"] else { return }
             self.lineLabel.text = name
-            self.lineStateView.backgroundColor = UIColor(hex: Int(color)!)
             self.lineLabel.textColor = UIColor(hex: 0xffffff)
-            self.chevronImage.tintColor = UIColor(hex: 0xffffff)
+            self.chevronImage.image = UIImage(named: "chevron.down")
+            self.lineStateView.backgroundColor = UIColor(hex: Int(color)!)
         }
     }
     @objc func didTapComboBox() {
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
-        let vc = HalfModalPresentationController()
+        let vc = SubwayLinesModalViewController()
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: false)
     }
 }
 
-// MARK: UISearchBarDelegate
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     // Dismiss keyboard when tap outside view
     func dismissKeyboard() {
@@ -124,5 +160,25 @@ extension SearchViewController: UISearchBarDelegate {
     // Dismiss keyboard when click search button
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - CollectionView data source, delegate
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 14
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SearchResultCollectionViewCell.identifier,
+            for: indexPath) as? SearchResultCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor(hex: 0xFF7A00)
+        } else {
+            cell.backgroundColor = UIColor(hex: 0x443872)
+        }
+        return cell
     }
 }
