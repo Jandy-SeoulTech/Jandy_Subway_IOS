@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          * 이 부분에서 앱 처음 사용 시 rootViewController를 온보딩 ViewController로 바꾸면 됩니다.
          */
         //window.rootViewController = ViewController()
-        let navVC = UINavigationController(rootViewController: MainViewController())
+        let navVC = UINavigationController(rootViewController: ViewController())
         window.rootViewController = navVC
         window.makeKeyAndVisible()
         self.window = window
