@@ -57,8 +57,7 @@ class SearchViewController: UIViewController {
     var patialText: String = ""
     var filteredData: [String]!
     // 임시 데이터
-    var model: [String] = ["가", "나", "가나", "가나다", "나다", "나다라", "다", "다라", "다라마",
-                          "라", "라마", "라마바", "마", "마바", "마바사"]
+    var model: [String] = ["역", "역리스트", "역리스트가", "역리스트가아직없다", "홍대입구", "합정", "신도림", "하계", "하남"]
     
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -72,6 +71,8 @@ class SearchViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
         // Get data from data base
         filteredData = model
+        
+        APICaller.shared.getSub()
     }
 }
 
@@ -135,7 +136,6 @@ extension SearchViewController {
         }
     }
     @objc func didTapComboBox() {
-        self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
         let vc = SubwayLinesModalViewController()
         vc.modalPresentationStyle = .overCurrentContext
@@ -179,16 +179,15 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 return UICollectionViewCell()
             }
         if patialText.isEmpty {
-            cell.configure(number: "1", name: filteredData[indexPath.row], color: 0x009D3E)
+            cell.configure(number: "2", name: filteredData[indexPath.row], color: 0x009D3E)
         } else {
-            cell.configure(number: "1", name: filteredData[indexPath.row], color: 0x009D3E, patial: patialText)
+            cell.configure(number: "2", name: filteredData[indexPath.row], color: 0x009D3E, patial: patialText)
         }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         // Send data to previous view controller
-        print(filteredData[indexPath.row])
         navigationController?.popViewController(animated: true)
     }
 }

@@ -153,6 +153,7 @@ extension SubwayLinesModalViewController: UICollectionViewDelegate, UICollection
         let name: String = model.name[indexPath.row]
         let color: Int = model.color[indexPath.row]
         cell.configure(number: number, name: name, color: color)
+        cell.layer.addBorder([.bottom], color: UIColor(hex: 0x9E9E9E), width: 0.2)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
