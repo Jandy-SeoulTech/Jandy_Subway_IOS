@@ -14,5 +14,5 @@
 - develop
 - feature/XXX ex) feature/login
 - release-XXX ex) release-1.0.0
-- hotfix-XXX ex) hotfix/login
+- hotfix-XXX ex) hotfix-login
 ```
