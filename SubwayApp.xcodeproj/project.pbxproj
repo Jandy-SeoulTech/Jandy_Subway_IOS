@@ -41,6 +41,7 @@
 		EE26264F284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
 		EE262650284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
 		EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDD39B0284CD38E001244AB /* Images.xcassets */; };
+		EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD39B6284CDD21001244AB /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		EE26263F284BA529002DBA5B /* Roboto-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.otf"; sourceTree = "<group>"; };
 		EE26264D284BBD46002DBA5B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		EEDD39B0284CD38E001244AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EEDD39B6284CDD21001244AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7965BDA99D81455AF8EB3E7 /* Pods-SubwayApp-SubwayAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SubwayApp-SubwayAppUITests/Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F953FA05838B88B942EE6810 /* Pods-SubwayAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayAppTests.release.xcconfig"; path = "Target Support Files/Pods-SubwayAppTests/Pods-SubwayAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		EE26262B284B9DB6002DBA5B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EEDD39B5284CDD19001244AB /* Main */,
 				EE14BEBC281E48760073A210 /* ViewController.swift */,
 				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
 			);
@@ -242,6 +245,14 @@
 				EE262638284BA459002DBA5B /* Font+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		EEDD39B5284CDD19001244AB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EEDD39B6284CDD21001244AB /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		F703FAA519E4BB4BF556D710 /* Pods */ = {
@@ -514,6 +525,7 @@
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EE262639284BA459002DBA5B /* Font+Extension.swift in Sources */,
+				EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */,
 				EE262627284B9D47002DBA5B /* CALayer+Extension.swift in Sources */,
 				EE14BEBB281E48760073A210 /* SceneDelegate.swift in Sources */,
 				EE262625284B9CBF002DBA5B /* UIColor+Extension.swift in Sources */,
