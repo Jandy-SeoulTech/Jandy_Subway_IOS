@@ -38,6 +38,12 @@ class MainViewController: UIViewController {
         $0.layer.cornerRadius = 4
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    private var transferSearchbar: UIButton = UIButton().then {
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.anza_gray1?.cgColor
+        $0.layer.cornerRadius = 4
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     private var arrivalSearchbar: UIButton = UIButton().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.anza_gray1?.cgColor
@@ -61,10 +67,11 @@ class MainViewController: UIViewController {
         $0.layer.shadowOffset = CGSize(width: 0, height: 6)
         $0.translatesAutoresizingMaskIntoConstraints = true;
     }
+    private var searchViewHeightConstraint = 107
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-       
+
         configureHistoryBtn()
         configureSearchView()
         configureSearchbarSV()
@@ -82,13 +89,14 @@ extension MainViewController {
             make.bottom.equalToSuperview().offset(-24)
             make.trailing.equalToSuperview().offset(-24)
         }
+        historyBtn.addTarget(self, action: #selector(didTapHistoryBtn), for: .touchUpInside)
     }
     func configureSearchView() {
         view.addSubview(searchView)
         searchView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(getStatusBarHeight())
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(107)
+            make.height.equalTo(searchViewHeightConstraint)
         }
     }
     func configureSearchbarSV() {
@@ -103,12 +111,14 @@ extension MainViewController {
         departureSearchbar.configuration = btnConfig(text: "출발 역명을 검색해주세요.")
         departureSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
+            make.height.equalTo(41)
         }
         
         searchbarSV.addArrangedSubview(arrivalSearchbar)
         arrivalSearchbar.configuration = btnConfig(text: "도착 역명을 검색해주세요.")
         arrivalSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
+            make.height.equalTo(41)
         }
     }
     func configureFlipBtn() {
@@ -126,6 +136,19 @@ extension MainViewController {
         }
     }
 }
+
+// MARK: - Action function
+extension MainViewController {
+    @objc func didTapHistoryBtn() {
+        let popUpVC = HistoryPopUpViewController()
+        popUpVC.modalTransitionStyle = .crossDissolve
+        popUpVC.modalPresentationStyle = .overFullScreen
+        //historyBtn.setImage(UIImage(named: "ic_xmark"), for: .normal)
+        //historyBtn.backgroundColor = .white
+        present(popUpVC, animated: true)
+    }
+}
+
 extension MainViewController {
     func btnConfig(text: String) -> UIButton.Configuration {
         var buttonConfig: UIButton.Configuration = UIButton.Configuration.plain()
@@ -144,7 +167,6 @@ extension MainViewController {
         buttonConfig.imagePadding = padding
         return buttonConfig
     }
-    
     func getStatusBarHeight() -> CGFloat {
         var statusBarHeight: CGFloat = 0
         if #available(iOS 15.0, *) {
