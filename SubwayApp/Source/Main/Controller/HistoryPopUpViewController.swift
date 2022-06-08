@@ -46,7 +46,7 @@ class HistoryPopUpViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let completeBtn = UIButton().then {
-        $0.backgroundColor = .anza_blue
+        $0.backgroundColor = .anza_gray2
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = .Roboto(.bold, size: 14)
         $0.layer.masksToBounds = true
@@ -207,6 +207,7 @@ extension HistoryPopUpViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedPos = indexPath.row
+        completeBtn.backgroundColor = .anza_blue
         collectionView.reloadData()
     }
 }
