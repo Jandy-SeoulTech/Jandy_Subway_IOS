@@ -26,6 +26,8 @@ class SubwayLineCollectionViewCell: UICollectionViewCell {
         $0.textColor = UIColor(hex: 0x000000)
         $0.backgroundColor = .clear
     }
+    let subwayInformation: LineInformation = LineInformation()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = UIColor(hex: 0xffffff)
@@ -48,17 +50,21 @@ class SubwayLineCollectionViewCell: UICollectionViewCell {
 
 // MARK: Configure Cell
 extension SubwayLineCollectionViewCell {
-    // configure(with model: Model) 로 바꿔야함
+    func configure(with model: Information) {
+        numberLabel.text = model.호선
+        numberLabel.backgroundColor = UIColor(hex: subwayInformation.getColor(name: model.호선))
+        nameLabel.text = model.전철역명
+    }
     func configure(number: String, name: String, color: Int) {
         numberLabel.text = number
         numberLabel.backgroundColor = UIColor(hex: color)
         nameLabel.text = name
     }
     // Label 부분 색상 적용 함수
-    func configure(number: String, name: String, color: Int, patial: String) {
-        numberLabel.text = number
-        numberLabel.backgroundColor = UIColor(hex: color)
-        nameLabel.text = name
+    func configure(with model: Information, patial: String) {
+        numberLabel.text = model.호선
+        numberLabel.backgroundColor = UIColor(hex: subwayInformation.getColor(name: model.호선))
+        nameLabel.text = model.전철역명
         if let text = nameLabel.text {
             let attributedString = NSMutableAttributedString(string: text)
             attributedString.addAttribute(.foregroundColor,
@@ -67,6 +73,7 @@ extension SubwayLineCollectionViewCell {
             nameLabel.attributedText = attributedString
         }
     }
+    
     func configureCell() {
         numberLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(15)
@@ -80,5 +87,4 @@ extension SubwayLineCollectionViewCell {
             make.leading.equalTo(numberLabel.snp.trailing).offset(15)
         }
     }
-    
 }

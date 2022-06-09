@@ -49,14 +49,14 @@ class SearchViewController: UIViewController {
     private var searchResultCollectionView: UICollectionView! = nil
     
     var patialText: String = ""
-    var filteredData: [String]!
-    // 임시 데이터
-    var model: [String] = ["역", "역리스트", "역리스트가", "역리스트가아직없다", "홍대입구", "합정", "신도림", "하계", "하남"]
+    var filteredData = [Information]()
+    var model = [Information]()
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        fetchData(line: "전체")
         searchBar.delegate = self
         dismissKeyboard()
         configureNavigationBar()
@@ -64,10 +64,32 @@ class SearchViewController: UIViewController {
         configureSearchResultCollectionView()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
         // Get data from data base
-        filteredData = model
+        
     }
 }
-
+extension SearchViewController {
+    func fetchData(line: String) {
+        SearchViewService.shared.getSubway(line: line) { response in
+            switch response {
+            case .success(let model):
+                guard let model = model as? [Information] else { return }
+                self.model = model
+                self.filteredData = model
+                DispatchQueue.main.async {
+                    self.searchResultCollectionView.reloadData()
+                }
+            case .networkFail:
+                print("network fail")
+            case .requestErr(let error):
+                print(error)
+            case .pathErr:
+                print("path error")
+            default:
+                print("error")
+            }
+        }
+    }
+}
 extension SearchViewController {
     // MARK: Configuration
     func configureNavigationBar() {
@@ -125,6 +147,7 @@ extension SearchViewController {
             self.lineLabel.textColor = UIColor(hex: 0xffffff)
             self.chevronImage.image = UIImage(named: "chevron.down")
             self.lineStateView.backgroundColor = UIColor(hex: Int(color)!)
+            fetchData(line: name)
         }
     }
     @objc func didTapSearchButton() {
@@ -149,9 +172,9 @@ extension SearchViewController: UISearchBarDelegate {
         self.searchBar.resignFirstResponder()
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = searchText.isEmpty ? model : model.filter({ $0.hasPrefix(searchText) })
+        filteredData = searchText.isEmpty ? model : model.filter({ $0.전철역명.hasPrefix(searchText) })
         patialText = searchText
-        searchResultCollectionView.reloadData()
+        self.searchResultCollectionView.reloadData()
     }
     // Dismiss keyboard when click search button
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -170,10 +193,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             for: indexPath) as? SubwayLineCollectionViewCell else {
                 return UICollectionViewCell()
             }
+        let index = indexPath.row
         if patialText.isEmpty {
-            cell.configure(number: "2", name: filteredData[indexPath.row], color: 0x009D3E)
+            cell.configure(with: filteredData[index])
         } else {
-            cell.configure(number: "2", name: filteredData[indexPath.row], color: 0x009D3E, patial: patialText)
+            cell.configure(with: filteredData[index], patial: patialText)
         }
         return cell
     }
