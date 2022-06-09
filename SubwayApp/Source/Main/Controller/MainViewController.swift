@@ -143,8 +143,6 @@ extension MainViewController {
         let popUpVC = HistoryPopUpViewController()
         popUpVC.modalTransitionStyle = .crossDissolve
         popUpVC.modalPresentationStyle = .overFullScreen
-        //historyBtn.setImage(UIImage(named: "ic_xmark"), for: .normal)
-        //historyBtn.backgroundColor = .white
         present(popUpVC, animated: true)
     }
 }

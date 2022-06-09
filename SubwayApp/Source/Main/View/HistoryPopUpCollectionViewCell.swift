@@ -20,12 +20,8 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private var transferConstraint: SnapKit.ConstraintItem?
-    private let transferLabel = UILabel().then {
-        $0.numberOfLines = 0
-        $0.font = .Roboto(.regular, size: 14)
-        $0.textColor = .anza_black
-        $0.textAlignment = .center
+    private let arrow = UIImageView(image: UIImage(named: "ic_arrow_right")?.withRenderingMode(.alwaysTemplate)).then {
+        $0.tintColor = .anza_dark_gray
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var arrivalConstraint: SnapKit.ConstraintItem?
@@ -39,7 +35,7 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(depatureLabel)
-        addSubview(transferLabel)
+        addSubview(arrow)
         addSubview(arrivalLabel)
     }
     required init?(coder: NSCoder) {
@@ -53,8 +49,7 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         depatureLabel.text = nil
         depatureLabel.textColor = .anza_black
-        transferLabel.text = nil
-        transferLabel.textColor = .anza_black
+        arrow.tintColor = .anza_dark_gray
         arrivalLabel.text = nil
         arrivalLabel.textColor = .anza_black
     }
@@ -63,18 +58,16 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
 // MARK: - Configuration
 extension HistoryPopUpCollectionViewCell {
     // 출발역, 환승역, 도착역과 중심 맞추기위해 오토레이아웃 값을 가져온다.
-    func setConstraints(departure: SnapKit.ConstraintItem, transfer: SnapKit.ConstraintItem, arrival: SnapKit.ConstraintItem) {
+    func setConstraints(departure: SnapKit.ConstraintItem, arrival: SnapKit.ConstraintItem) {
         depatureConstraint = departure
-        transferConstraint = transfer
         arrivalConstraint = arrival
     }
     // 셀 내용 설정
-    func configure(depature: String, transfer: String, arrival: String, color: UIColor?) {
-        depatureLabel.text = depature
+    func configure(with model: History, color: UIColor?) {
+        depatureLabel.text = model.depature
         depatureLabel.textColor = color
-        transferLabel.text = transfer
-        transferLabel.textColor = color
-        arrivalLabel.text = arrival
+        arrow.tintColor = color
+        arrivalLabel.text = model.arrival
         arrivalLabel.textColor = color
     }
     // 오토레이아웃 설정
@@ -86,12 +79,8 @@ extension HistoryPopUpCollectionViewCell {
                 make.width.equalToSuperview().multipliedBy(0.3)
             }
         }
-        if let transferCenterX = transferConstraint {
-            transferLabel.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.centerX.equalTo(transferCenterX)
-                make.width.equalToSuperview().multipliedBy(0.3)
-            }
+        arrow.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
         if let arrivalCenterX = arrivalConstraint {
             arrivalLabel.snp.makeConstraints { make in
