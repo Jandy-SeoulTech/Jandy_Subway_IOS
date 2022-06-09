@@ -21,7 +21,7 @@ class LineSelectModalViewController: UIViewController {
     weak var containerViewHeightConstraint: NSLayoutConstraint?
     weak var containerViewBottomConstraint: NSLayoutConstraint?
     
-    let model: SubwayLine = SubwayLine()
+    let model: LineInformation = LineInformation()
     
     private var subwayLinesCollectionView: UICollectionView! = nil
     private var titleLabel = UILabel().then {
@@ -109,11 +109,7 @@ extension LineSelectModalViewController {
         closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
         configureCollectionView()
     }
-}
-
-// MARK: - Collection view
-extension LineSelectModalViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    // MARK: configure collection view
+    // configure collection view
     func configureLayout() -> UICollectionViewCompositionalLayout{
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -142,7 +138,11 @@ extension LineSelectModalViewController: UICollectionViewDelegate, UICollectionV
         subwayLinesCollectionView.register(SubwayLineCollectionViewCell.self,
                                            forCellWithReuseIdentifier: SubwayLineCollectionViewCell.identifier)
     }
-    // MARK: collection view data source, delegate
+}
+
+// MARK: Collection view Data source, Delegate
+extension LineSelectModalViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SubwayLineCollectionViewCell.identifier,
