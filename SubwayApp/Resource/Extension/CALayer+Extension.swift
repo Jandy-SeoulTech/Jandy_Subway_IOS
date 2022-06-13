@@ -31,4 +31,10 @@ extension CALayer {
             self.addSublayer(border)
         }
     }
+    func addBottomBorder(x: CGFloat, color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.frame = CGRect.init(x: x, y: frame.height - width, width: frame.width, height: width)
+        border.backgroundColor = color.cgColor;
+        self.addSublayer(border)
+    }
 }

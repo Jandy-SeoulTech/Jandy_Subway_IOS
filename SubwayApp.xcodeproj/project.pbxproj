@@ -46,6 +46,7 @@
 		EE26265C284BC285002DBA5B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26265B284BC285002DBA5B /* SearchViewController.swift */; };
 		EE26265E284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26265D284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift */; };
 		EE262660284BC34A002DBA5B /* LineSelectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26265F284BC34A002DBA5B /* LineSelectModalViewController.swift */; };
+		EE9BEAED2854C400005C0E52 /* Search.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE9BEAEC2854C400005C0E52 /* Search.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		EE26265B284BC285002DBA5B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EE26265D284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE26265F284BC34A002DBA5B /* LineSelectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSelectModalViewController.swift; sourceTree = "<group>"; };
+		EE9BEAEC2854C400005C0E52 /* Search.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Search.xcassets; sourceTree = "<group>"; };
 		F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7965BDA99D81455AF8EB3E7 /* Pods-SubwayApp-SubwayAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SubwayApp-SubwayAppUITests/Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F953FA05838B88B942EE6810 /* Pods-SubwayAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayAppTests.release.xcconfig"; path = "Target Support Files/Pods-SubwayAppTests/Pods-SubwayAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE6739E12824EF730058A702 /* Extension */,
+				EE9BEAEC2854C400005C0E52 /* Search.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE262646284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
+				EE9BEAED2854C400005C0E52 /* Search.xcassets in Resources */,
 				EE262643284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
 				EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */,
 				EE14BEC5281E48770073A210 /* LaunchScreen.storyboard in Resources */,

@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 class LineSelectModalViewController: UIViewController {
-    // MARK: Constatns
+    // Constatns
     private let dimmedAlpha: CGFloat = 0.3
     private let defaultHeight: CGFloat = UIScreen.main.bounds.size.height * 0.8
     private let dismissibleHeight: CGFloat = 200
@@ -21,40 +21,34 @@ class LineSelectModalViewController: UIViewController {
     weak var containerViewHeightConstraint: NSLayoutConstraint?
     weak var containerViewBottomConstraint: NSLayoutConstraint?
     
-    let model: LineInformation = LineInformation()
-    
     private var subwayLinesCollectionView: UICollectionView! = nil
-    private var titleLabel = UILabel().then {
-        $0.text = "호선"
-        $0.font = .systemFont(ofSize: 20, weight: .bold)
-        $0.numberOfLines = 0
-        $0.textColor = UIColor(hex: 0x212121)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.sizeToFit()
-    }
     private var dimmedView = UIView().then {
-        $0.backgroundColor = UIColor(hex: 0x000000)
-        $0.alpha = 0.3
+        $0.backgroundColor = UIColor(hex: 0x000000, alpha: 0.6)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var containerView = UIView().then {
-        $0.backgroundColor = UIColor(hex: 0xFFFFFF)
+        $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.clipsToBounds = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private var closeButton = UIButton().then {
+    private let gradientHeader = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let closeButton = UIButton().then {
         $0.setImage(UIImage(named: "xbtn-large"), for: .normal)
-        $0.tintColor = UIColor(hex: 0x212121)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
-        setConstraints()
+        configureDimmedView()
+        configureContainerView()
+        configureHeaderView()
+        configureCloseBtn()
+        configureCollectionView()
         setupTapGesture()
         setupPanGesture()
     }
@@ -67,15 +61,40 @@ class LineSelectModalViewController: UIViewController {
 
 // MARK: - Configuration
 extension LineSelectModalViewController {
-    func setConstraints() {
+    func configureHeaderView() {
+        containerView.addSubview(gradientHeader)
+        gradientHeader.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(containerView.snp.top)
+            make.height.equalTo(55)
+        }
+        print(gradientHeader.bounds)
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor(hex: 0xFFFFFF, alpha: 1).cgColor,
+                           UIColor(hex: 0xFFFFFF, alpha: 0.9).cgColor,
+                           UIColor(hex: 0xFFFFFF).cgColor
+        ]
+        gradient.locations = [0.8, 0.88, 1.0]
+        gradientHeader.layer.addSublayer(gradient)
+    }
+    func configureCloseBtn() {
+        gradientHeader.addSubview(closeButton)
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(gradientHeader.snp.top).offset(24)
+            make.trailing.equalTo(gradientHeader.snp.trailing).offset(-24)
+            make.height.width.equalTo(24)
+        }
+        closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+    }
+    func configureDimmedView() {
         view.addSubview(dimmedView)
-        // Dimmed view constraint
         dimmedView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
+    }
+    func configureContainerView() {
         view.addSubview(containerView)
         // Container view constraint
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
         }
@@ -92,22 +111,6 @@ extension LineSelectModalViewController {
         // Activate constraints
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
-        
-        // Title constraint
-        containerView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.leading.equalToSuperview().offset(24)
-        }
-        // Close button constraint
-        containerView.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.width.equalTo(25)
-        }
-        closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-        configureCollectionView()
     }
     // configure collection view
     func configureLayout() -> UICollectionViewCompositionalLayout{
@@ -116,7 +119,7 @@ extension LineSelectModalViewController {
                                                heightDimension: .fractionalHeight(1.0)))
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(60)),
+                                               heightDimension: .absolute(56)),
             subitem: item,
             count: 1)
         let section = NSCollectionLayoutSection(group: group)
@@ -126,13 +129,14 @@ extension LineSelectModalViewController {
     func configureCollectionView() {
         subwayLinesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
         containerView.addSubview(subwayLinesCollectionView)
-        subwayLinesCollectionView.backgroundColor = UIColor(hex: 0xffffff)
+        subwayLinesCollectionView.backgroundColor = .white
         subwayLinesCollectionView.dataSource = self
         subwayLinesCollectionView.delegate = self
+        subwayLinesCollectionView.showsVerticalScrollIndicator = false
         subwayLinesCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(containerView.snp.leading)
             make.trailing.equalTo(containerView.snp.trailing)
-            make.top.equalTo(titleLabel.snp.bottom).offset(11)
+            make.top.equalTo(closeButton.snp.bottom)
             make.bottom.equalTo(containerView.snp.bottom)
         }
         subwayLinesCollectionView.register(SubwayLineCollectionViewCell.self,
@@ -142,26 +146,23 @@ extension LineSelectModalViewController {
 
 // MARK: Collection view Data source, Delegate
 extension LineSelectModalViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SubwayLineCollectionViewCell.identifier,
             for: indexPath) as? SubwayLineCollectionViewCell else {
                 return UICollectionViewCell()
             }
-        let number: String = model.line[indexPath.row]
-        let name: String = model.name[indexPath.row]
-        let color: Int = model.color[indexPath.row]
-        cell.configure(number: number, name: name, color: color)
-        cell.layer.addBorder([.bottom], color: UIColor(hex: 0x9E9E9E), width: 0.2)
+        let name: String = LineInformation.shared.name[indexPath.row]
+        cell.configure(name: name)
+        cell.layer.addBorder([.bottom], color: .anzaGray4!, width: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.line.count
+        return LineInformation.shared.name.count
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let dic: [String: String] = ["name": model.name[indexPath.row],"color": "\(model.color[indexPath.row])"]
+        let dic: [String: String] = ["name": LineInformation.shared.name[indexPath.row]]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "subway_line"), object: dic)
         animateDismissView()
     }
@@ -175,7 +176,6 @@ extension LineSelectModalViewController {
             self?.view.layoutIfNeeded()
         }
     }
-    
     func animateContainerHeight(_ height: CGFloat) {
         UIView.animate(withDuration: 0.4) { [weak self] in
             // Update container height
