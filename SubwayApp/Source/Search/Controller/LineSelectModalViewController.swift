@@ -23,7 +23,7 @@ class LineSelectModalViewController: UIViewController {
     
     private var subwayLinesCollectionView: UICollectionView! = nil
     private var dimmedView = UIView().then {
-        $0.backgroundColor = UIColor(hex: 0x000000, alpha: 0.6)
+        $0.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var containerView = UIView().then {
@@ -34,6 +34,8 @@ class LineSelectModalViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let gradientHeader = UIView().then {
+        $0.backgroundColor = .white
+        $0.addGradient()
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let closeButton = UIButton().then {
@@ -46,9 +48,9 @@ class LineSelectModalViewController: UIViewController {
         super.viewDidLoad()
         configureDimmedView()
         configureContainerView()
+        configureCollectionView()
         configureHeaderView()
         configureCloseBtn()
-        configureCollectionView()
         setupTapGesture()
         setupPanGesture()
     }
@@ -61,31 +63,6 @@ class LineSelectModalViewController: UIViewController {
 
 // MARK: - Configuration
 extension LineSelectModalViewController {
-    func configureHeaderView() {
-        containerView.addSubview(gradientHeader)
-        gradientHeader.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(containerView.snp.top)
-            make.height.equalTo(55)
-        }
-        print(gradientHeader.bounds)
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor(hex: 0xFFFFFF, alpha: 1).cgColor,
-                           UIColor(hex: 0xFFFFFF, alpha: 0.9).cgColor,
-                           UIColor(hex: 0xFFFFFF).cgColor
-        ]
-        gradient.locations = [0.8, 0.88, 1.0]
-        gradientHeader.layer.addSublayer(gradient)
-    }
-    func configureCloseBtn() {
-        gradientHeader.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(gradientHeader.snp.top).offset(24)
-            make.trailing.equalTo(gradientHeader.snp.trailing).offset(-24)
-            make.height.width.equalTo(24)
-        }
-        closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-    }
     func configureDimmedView() {
         view.addSubview(dimmedView)
         dimmedView.snp.makeConstraints { make in
@@ -112,6 +89,22 @@ extension LineSelectModalViewController {
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
     }
+    func configureHeaderView() {
+        containerView.addSubview(gradientHeader)
+        gradientHeader.snp.makeConstraints { make in
+            make.leading.trailing.top.equalTo(containerView)
+            make.height.equalTo(55)
+        }
+    }
+    func configureCloseBtn() {
+        gradientHeader.addSubview(closeButton)
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(gradientHeader.snp.top).offset(24)
+            make.trailing.equalTo(gradientHeader.snp.trailing).offset(-24)
+            make.height.width.equalTo(24)
+        }
+        closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+    }
     // configure collection view
     func configureLayout() -> UICollectionViewCompositionalLayout{
         let item = NSCollectionLayoutItem(
@@ -136,7 +129,7 @@ extension LineSelectModalViewController {
         subwayLinesCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(containerView.snp.leading)
             make.trailing.equalTo(containerView.snp.trailing)
-            make.top.equalTo(closeButton.snp.bottom)
+            make.top.equalTo(containerView.snp.top).offset(41)
             make.bottom.equalTo(containerView.snp.bottom)
         }
         subwayLinesCollectionView.register(SubwayLineCollectionViewCell.self,
