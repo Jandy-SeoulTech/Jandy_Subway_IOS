@@ -26,7 +26,7 @@ extension UIColor {
     open class var anza_dark_gray:UIColor? { UIColor(named: "anza_dark_gray") }     // rgb 85 85 85
     open class var anza_light_gray:UIColor? { UIColor(named: "anza_light_gray") }   // rgb 223 223 223
     open class var anza_light_blue1:UIColor? { UIColor(named: "anza_light_blue1") } // rgb 111 151 255
-    open class var anza_light_blue2:UIColor? { UIColor(named: "anza_light_blue2") } // rgb 163 189 255
+    open class var anza_light_blue2:UIColor? { UIColor(named: "anza_light_blue2") } // rgb 215 226 255
     
     open class var anzaBlack:UIColor? { UIColor(named: "anzaBlack") }
     open class var anzaBlue:UIColor? { UIColor(named: "anzaBlue") }
