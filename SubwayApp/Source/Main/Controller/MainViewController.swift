@@ -53,9 +53,11 @@ class MainViewController: UIViewController {
     private let searchbarSV = UIStackView().then {
         $0.backgroundColor = .clear
         $0.axis = .vertical
-        $0.distribution = .fillEqually
+        $0.distribution = .fillProportionally
         $0.spacing = 8
-        $0.alignment = .center
+        $0.alignment = .fill
+        
+        $0.isUserInteractionEnabled = true
         $0.translatesAutoresizingMaskIntoConstraints = true;
     }
     private let searchView = UIView().then {
@@ -102,7 +104,8 @@ extension MainViewController {
     func configureSearchbarSV() {
         searchView.addSubview(searchbarSV)
         searchbarSV.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(searchView.snp.leading).offset(44)
+            make.trailing.equalTo(searchView.snp.trailing).offset(-51)
             make.top.equalTo(searchView.snp.top).offset(7)
             make.bottom.equalTo(searchView.snp.bottom).offset(-10)
         }
@@ -148,12 +151,11 @@ extension MainViewController {
         present(popUpVC, animated: true)
     }
     @objc func didTapDepatureBtn() {
-        print("depature")
-        //let searchVC = SearchViewController()
-        //present(searchVC, animated: true)
+        print("de")
+        let searchVC = SearchViewController()
+        self.navigationController?.pushViewController(searchVC, animated: true)
     }
     @objc func didTapArrivalBtn() {
-        print("arrival")
         let searchVC = SearchViewController()
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
