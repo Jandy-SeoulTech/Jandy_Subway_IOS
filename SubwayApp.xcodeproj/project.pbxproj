@@ -47,6 +47,14 @@
 		EE26265E284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26265D284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift */; };
 		EE262660284BC34A002DBA5B /* LineSelectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26265F284BC34A002DBA5B /* LineSelectModalViewController.swift */; };
 		EE9BEAED2854C400005C0E52 /* Search.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE9BEAEC2854C400005C0E52 /* Search.xcassets */; };
+		EE26264E284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
+		EE26264F284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
+		EE262650284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
+		EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */; };
+		EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDD39B0284CD38E001244AB /* Images.xcassets */; };
+		EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD39B6284CDD21001244AB /* MainViewController.swift */; };
+		EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */; };
+		EEF6F00E28524D1700FD69A8 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF6F00D28524D1700FD69A8 /* History.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +110,12 @@
 		EE26265D284BC2E6002DBA5B /* SubwayLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE26265F284BC34A002DBA5B /* LineSelectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSelectModalViewController.swift; sourceTree = "<group>"; };
 		EE9BEAEC2854C400005C0E52 /* Search.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Search.xcassets; sourceTree = "<group>"; };
+		EE26264D284BBD46002DBA5B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpViewController.swift; sourceTree = "<group>"; };
+		EEDD39B0284CD38E001244AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EEDD39B6284CDD21001244AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpCollectionViewCell.swift; sourceTree = "<group>"; };
+		EEF6F00D28524D1700FD69A8 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7965BDA99D81455AF8EB3E7 /* Pods-SubwayApp-SubwayAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SubwayApp-SubwayAppUITests/Pods-SubwayApp-SubwayAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F953FA05838B88B942EE6810 /* Pods-SubwayAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayAppTests.release.xcconfig"; path = "Target Support Files/Pods-SubwayAppTests/Pods-SubwayAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +217,7 @@
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE6739E12824EF730058A702 /* Extension */,
 				EE9BEAEC2854C400005C0E52 /* Search.xcassets */,
+				EEDD39B0284CD38E001244AB /* Images.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -211,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				EE262651284BC0D2002DBA5B /* Search */,
+				EEDD39B5284CDD19001244AB /* Main */,
 				EE14BEBC281E48760073A210 /* ViewController.swift */,
 				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
 			);
@@ -418,6 +434,7 @@
 			files = (
 				EE262646284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
 				EE9BEAED2854C400005C0E52 /* Search.xcassets in Resources */,
+				EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */,
 				EE262643284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
 				EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */,
 				EE14BEC5281E48770073A210 /* LaunchScreen.storyboard in Resources */,
@@ -566,6 +583,7 @@
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EE262658284BC229002DBA5B /* Subway.swift in Sources */,
 				EE26265C284BC285002DBA5B /* SearchViewController.swift in Sources */,
+				EEF6F00E28524D1700FD69A8 /* History.swift in Sources */,
 				EE262639284BA459002DBA5B /* Font+Extension.swift in Sources */,
 				EE262627284B9D47002DBA5B /* CALayer+Extension.swift in Sources */,
 				EE262653284BC1C1002DBA5B /* PaddingLabel.swift in Sources */,
