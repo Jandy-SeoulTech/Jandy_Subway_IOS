@@ -140,6 +140,17 @@ extension MainViewController {
             make.trailing.equalTo(searchView.snp.trailing).offset(-19)
         }
     }
+    func configureNavigationBar() {
+        let backImage = UIImage(named: "ic_chevron_left")?.withAlignmentRectInsets(UIEdgeInsets(top: 0,
+                                                                                          left: -5,
+                                                                                          bottom: 5,
+                                                                                          right: 0))
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        backButton.tintColor = .black
+        self.navigationItem.backBarButtonItem = backButton
+    }
 }
 
 // MARK: - Action function
