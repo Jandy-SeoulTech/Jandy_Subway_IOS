@@ -198,10 +198,10 @@
 		EE26262A284B9DAC002DBA5B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EE26262F284B9E93002DBA5B /* Font */,
 				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE6739E12824EF730058A702 /* Extension */,
-				EE26262F284B9E93002DBA5B /* Font */,
 				EE9BEAEC2854C400005C0E52 /* Search.xcassets */,
 			);
 			path = Resource;
