@@ -198,10 +198,10 @@
 		EE26262A284B9DAC002DBA5B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				EE26262F284B9E93002DBA5B /* Font */,
 				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE6739E12824EF730058A702 /* Extension */,
+				EE26262F284B9E93002DBA5B /* Font */,
 				EE9BEAEC2854C400005C0E52 /* Search.xcassets */,
 			);
 			path = Resource;
@@ -285,10 +285,10 @@
 		EE6739E12824EF730058A702 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				EE262624284B9CBF002DBA5B /* UIColor+Extension.swift */,
 				EE262626284B9D47002DBA5B /* CALayer+Extension.swift */,
-				EE262628284B9D7C002DBA5B /* UIView+Extension.swift */,
 				EE262638284BA459002DBA5B /* Font+Extension.swift */,
+				EE262624284B9CBF002DBA5B /* UIColor+Extension.swift */,
+				EE262628284B9D7C002DBA5B /* UIView+Extension.swift */,
 				EE262652284BC1C1002DBA5B /* PaddingLabel.swift */,
 			);
 			path = Extension;
