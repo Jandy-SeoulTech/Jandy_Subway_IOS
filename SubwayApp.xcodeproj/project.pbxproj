@@ -40,6 +40,13 @@
 		EE26264E284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
 		EE26264F284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
 		EE262650284BBD46002DBA5B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE26264D284BBD46002DBA5B /* APIService.swift */; };
+		EE28E19D2859CE770008C5AD /* LineSelectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E19C2859CE770008C5AD /* LineSelectModalViewController.swift */; };
+		EE28E19F2859CE8E0008C5AD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E19E2859CE8E0008C5AD /* SearchViewController.swift */; };
+		EE28E1A12859CEA30008C5AD /* LineInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A02859CEA30008C5AD /* LineInformation.swift */; };
+		EE28E1A32859CEAE0008C5AD /* Subway.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A22859CEAE0008C5AD /* Subway.swift */; };
+		EE28E1A52859CEC50008C5AD /* SubwayLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A42859CEC50008C5AD /* SubwayLineCollectionViewCell.swift */; };
+		EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A62859CEDD0008C5AD /* SearchViewService.swift */; };
+		EE28E1A92859D03A0008C5AD /* Search.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE28E1A82859D03A0008C5AD /* Search.xcassets */; };
 		EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */; };
 		EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDD39B0284CD38E001244AB /* Images.xcassets */; };
 		EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD39B6284CDD21001244AB /* MainViewController.swift */; };
@@ -93,6 +100,13 @@
 		EE26263E284BA529002DBA5B /* Roboto-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.otf"; sourceTree = "<group>"; };
 		EE26263F284BA529002DBA5B /* Roboto-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.otf"; sourceTree = "<group>"; };
 		EE26264D284BBD46002DBA5B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EE28E19C2859CE770008C5AD /* LineSelectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSelectModalViewController.swift; sourceTree = "<group>"; };
+		EE28E19E2859CE8E0008C5AD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EE28E1A02859CEA30008C5AD /* LineInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineInformation.swift; sourceTree = "<group>"; };
+		EE28E1A22859CEAE0008C5AD /* Subway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subway.swift; sourceTree = "<group>"; };
+		EE28E1A42859CEC50008C5AD /* SubwayLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLineCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE28E1A62859CEDD0008C5AD /* SearchViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewService.swift; sourceTree = "<group>"; };
+		EE28E1A82859D03A0008C5AD /* Search.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Search.xcassets; sourceTree = "<group>"; };
 		EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpViewController.swift; sourceTree = "<group>"; };
 		EEDD39B0284CD38E001244AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EEDD39B6284CDD21001244AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +213,7 @@
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
 				EE6739E12824EF730058A702 /* Extension */,
 				EEDD39B0284CD38E001244AB /* Images.xcassets */,
+				EE28E1A82859D03A0008C5AD /* Search.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -206,6 +221,7 @@
 		EE26262B284B9DB6002DBA5B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EE28E1982859CE420008C5AD /* Search */,
 				EEDD39B5284CDD19001244AB /* Main */,
 				EE14BEBC281E48760073A210 /* ViewController.swift */,
 				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
@@ -238,8 +254,45 @@
 			isa = PBXGroup;
 			children = (
 				EE26264D284BBD46002DBA5B /* APIService.swift */,
+				EE28E1A62859CEDD0008C5AD /* SearchViewService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		EE28E1982859CE420008C5AD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EE28E19B2859CE560008C5AD /* View */,
+				EE28E19A2859CE530008C5AD /* Model */,
+				EE28E1992859CE4E0008C5AD /* Controller */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		EE28E1992859CE4E0008C5AD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EE28E19C2859CE770008C5AD /* LineSelectModalViewController.swift */,
+				EE28E19E2859CE8E0008C5AD /* SearchViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE28E19A2859CE530008C5AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EE28E1A02859CEA30008C5AD /* LineInformation.swift */,
+				EE28E1A22859CEAE0008C5AD /* Subway.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EE28E19B2859CE560008C5AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE28E1A42859CEC50008C5AD /* SubwayLineCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EE6739E12824EF730058A702 /* Extension */ = {
@@ -413,6 +466,7 @@
 				EE262646284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
 				EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */,
 				EE262643284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
+				EE28E1A92859D03A0008C5AD /* Search.xcassets in Resources */,
 				EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */,
 				EE14BEC5281E48770073A210 /* LaunchScreen.storyboard in Resources */,
 				EE14BEC2281E48770073A210 /* Assets.xcassets in Resources */,
@@ -555,16 +609,22 @@
 			files = (
 				EE26264E284BBD46002DBA5B /* APIService.swift in Sources */,
 				EE262629284B9D7C002DBA5B /* UIView+Extension.swift in Sources */,
+				EE28E1A32859CEAE0008C5AD /* Subway.swift in Sources */,
+				EE28E19D2859CE770008C5AD /* LineSelectModalViewController.swift in Sources */,
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
 				EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */,
+				EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */,
 				EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EEF6F00E28524D1700FD69A8 /* History.swift in Sources */,
+				EE28E19F2859CE8E0008C5AD /* SearchViewController.swift in Sources */,
 				EE262639284BA459002DBA5B /* Font+Extension.swift in Sources */,
 				EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */,
 				EE262627284B9D47002DBA5B /* CALayer+Extension.swift in Sources */,
 				EE14BEBB281E48760073A210 /* SceneDelegate.swift in Sources */,
 				EE262625284B9CBF002DBA5B /* UIColor+Extension.swift in Sources */,
+				EE28E1A52859CEC50008C5AD /* SubwayLineCollectionViewCell.swift in Sources */,
+				EE28E1A12859CEA30008C5AD /* LineInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

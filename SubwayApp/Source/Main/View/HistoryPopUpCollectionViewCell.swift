@@ -16,19 +16,19 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     private let depatureLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .Roboto(.regular, size: 14)
-        $0.textColor = .anza_black
+        $0.textColor = .anzaBlack
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let arrow = UIImageView(image: UIImage(named: "ic_arrow_right")?.withRenderingMode(.alwaysTemplate)).then {
-        $0.tintColor = .anza_dark_gray
+        $0.tintColor = .anzaDarkGray
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var arrivalConstraint: SnapKit.ConstraintItem?
     private let arrivalLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .Roboto(.regular, size: 14)
-        $0.textColor = .anza_black
+        $0.textColor = .anzaBlack
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -48,10 +48,10 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         depatureLabel.text = nil
-        depatureLabel.textColor = .anza_black
-        arrow.tintColor = .anza_dark_gray
+        depatureLabel.textColor = .anzaBlack
+        arrow.tintColor = .anzaDarkGray
         arrivalLabel.text = nil
-        arrivalLabel.textColor = .anza_black
+        arrivalLabel.textColor = .anzaBlack
     }
 }
 

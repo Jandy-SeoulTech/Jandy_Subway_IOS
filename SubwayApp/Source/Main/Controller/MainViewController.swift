@@ -11,7 +11,7 @@ import Then
 
 class MainViewController: UIViewController {
     private let historyBtn = UIButton().then {
-        $0.backgroundColor = .anza_blue
+        $0.backgroundColor = .anzaBlue
         $0.setImage(UIImage(named: "ic_clock")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .white
         $0.layer.cornerRadius = 28
@@ -34,19 +34,19 @@ class MainViewController: UIViewController {
     }
     private var departureSearchbar = UIButton().then {
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.anza_gray1?.cgColor
+        $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var transferSearchbar: UIButton = UIButton().then {
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.anza_gray1?.cgColor
+        $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var arrivalSearchbar: UIButton = UIButton().then {
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.anza_gray1?.cgColor
+        $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -108,6 +108,7 @@ extension MainViewController {
         }
         
         searchbarSV.addArrangedSubview(departureSearchbar)
+        departureSearchbar.addTarget(self, action: #selector(didTapDepatureBtn), for: .touchUpInside)
         departureSearchbar.configuration = btnConfig(text: "출발 역명을 검색해주세요.")
         departureSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
@@ -115,6 +116,7 @@ extension MainViewController {
         }
         
         searchbarSV.addArrangedSubview(arrivalSearchbar)
+        arrivalSearchbar.addTarget(self, action: #selector(didTapArrivalBtn), for: .touchUpInside)
         arrivalSearchbar.configuration = btnConfig(text: "도착 역명을 검색해주세요.")
         arrivalSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
@@ -145,6 +147,16 @@ extension MainViewController {
         popUpVC.modalPresentationStyle = .overFullScreen
         present(popUpVC, animated: true)
     }
+    @objc func didTapDepatureBtn() {
+        print("depature")
+        //let searchVC = SearchViewController()
+        //present(searchVC, animated: true)
+    }
+    @objc func didTapArrivalBtn() {
+        print("arrival")
+        let searchVC = SearchViewController()
+        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
 }
 
 extension MainViewController {
@@ -152,7 +164,7 @@ extension MainViewController {
         var buttonConfig: UIButton.Configuration = UIButton.Configuration.plain()
         var title = AttributedString.init(text)
         title.font = UIFont.Roboto(.regular, size: 14)
-        title.foregroundColor = .anza_gray2
+        title.foregroundColor = .anzaGray2
         
         let titleWidth = NSAttributedString(title).size().width
         // 145 = left margin(44) - right margin(51) - left padding(16) - right padding(10) - ic_search width(24)

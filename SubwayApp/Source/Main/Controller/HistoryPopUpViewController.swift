@@ -21,7 +21,7 @@ class HistoryPopUpViewController: UIViewController {
         $0.text = "출발역"
         $0.font = UIFont.Roboto(.regular, size: 14)
         $0.textAlignment = .center
-        $0.textColor = .anza_blue
+        $0.textColor = .anzaBlue
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let arrivalLabel = UILabel().then {
@@ -29,7 +29,7 @@ class HistoryPopUpViewController: UIViewController {
         $0.text = "도착역"
         $0.font = UIFont.Roboto(.regular, size: 14)
         $0.textAlignment = .center
-        $0.textColor = .anza_blue
+        $0.textColor = .anzaBlue
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let closeBtn = UIButton().then {
@@ -49,7 +49,7 @@ class HistoryPopUpViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let completeBtn = UIButton().then {
-        $0.backgroundColor = .anza_gray2
+        $0.backgroundColor = .anzaGray2
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = .Roboto(.bold, size: 14)
         $0.layer.masksToBounds = true
@@ -127,7 +127,7 @@ extension HistoryPopUpViewController {
         let attrString = NSAttributedString(string:"최근 갔던 경로",
                                             attributes: [.font: UIFont.Roboto(.bold, size: 18) as Any,
                                                          .paragraphStyle: paragraphStyle,
-                                                         .foregroundColor: UIColor.anza_black as Any])
+                                                         .foregroundColor: UIColor.anzaBlack as Any])
         titleLabel.attributedText = attrString
         containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -225,20 +225,20 @@ extension HistoryPopUpViewController: UICollectionViewDelegate, UICollectionView
             return UICollectionViewCell()
         }
         if selectedPos == indexPath.row {
-            cell.backgroundColor = .anza_light_blue2
-            cell.configure(with: model[indexPath.row], color: .anza_blue)
+            cell.backgroundColor = .anzaLightBlue2
+            cell.configure(with: model[indexPath.row], color: .anzaBlue)
         } else {
             cell.backgroundColor = .white
-            cell.configure(with: model[indexPath.row], color: .anza_black)
+            cell.configure(with: model[indexPath.row], color: .anzaBlack)
         }
         cell.setConstraints(departure: depatureLabel.snp.centerX, arrival: arrivalLabel.snp.centerX)
-        cell.layer.addBorder([.top], color: .anza_light_gray!, width: 1)
+        cell.layer.addBorder([.top], color: .anzaLightGray!, width: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedPos = indexPath.row
-        completeBtn.backgroundColor = .anza_blue
+        completeBtn.backgroundColor = .anzaBlue
         collectionView.reloadData()
     }
 }
