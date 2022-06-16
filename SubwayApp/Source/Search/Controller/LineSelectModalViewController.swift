@@ -39,7 +39,8 @@ class LineSelectModalViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let closeButton = UIButton().then {
-        $0.setImage(UIImage(named: "xbtn-large"), for: .normal)
+        $0.setImage(UIImage(named: "ic_xmark")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        $0.tintColor = .anzaBlack
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
