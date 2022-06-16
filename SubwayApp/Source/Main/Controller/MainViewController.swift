@@ -20,15 +20,18 @@ class MainViewController: UIViewController {
         $0.layer.shadowOffset = .zero
         $0.layer.shadowRadius = 12
         $0.layer.masksToBounds = false
+        $0.adjustsImageWhenHighlighted = false
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let flipBtn = UIButton().then {
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "ic_flip"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let busBtn = UIButton().then {
         $0.backgroundColor = .clear
+        $0.adjustsImageWhenHighlighted = false
         $0.setImage(UIImage(named: "ic_bus"), for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -51,12 +54,10 @@ class MainViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let searchbarSV = UIStackView().then {
-        $0.backgroundColor = .clear
         $0.axis = .vertical
-        $0.distribution = .fillProportionally
         $0.spacing = 8
-        $0.alignment = .fill
-        
+        $0.distribution = .fillProportionally
+        $0.alignment = .center
         $0.isUserInteractionEnabled = true
         $0.translatesAutoresizingMaskIntoConstraints = true;
     }
@@ -73,12 +74,21 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
         configureHistoryBtn()
         configureSearchView()
         configureSearchbarSV()
         configureFlipBtn()
         configureBusBtn()
+        configureNavigationBar()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 
@@ -97,6 +107,7 @@ extension MainViewController {
         view.addSubview(searchView)
         searchView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(getStatusBarHeight())
+            //make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(searchViewHeightConstraint)
         }
@@ -112,7 +123,7 @@ extension MainViewController {
         
         searchbarSV.addArrangedSubview(departureSearchbar)
         departureSearchbar.addTarget(self, action: #selector(didTapDepatureBtn), for: .touchUpInside)
-        departureSearchbar.configuration = btnConfig(text: "출발 역명을 검색해주세요.")
+        departureSearchbar.configuration = btnConfig(text: "출발 역명을 검색해주세요.", color: .anzaGray2)
         departureSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
             make.height.equalTo(41)
@@ -120,7 +131,7 @@ extension MainViewController {
         
         searchbarSV.addArrangedSubview(arrivalSearchbar)
         arrivalSearchbar.addTarget(self, action: #selector(didTapArrivalBtn), for: .touchUpInside)
-        arrivalSearchbar.configuration = btnConfig(text: "도착 역명을 검색해주세요.")
+        arrivalSearchbar.configuration = btnConfig(text: "도착 역명을 검색해주세요.", color: .anzaGray2)
         arrivalSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
             make.height.equalTo(41)
@@ -128,6 +139,7 @@ extension MainViewController {
     }
     func configureFlipBtn() {
         searchView.addSubview(flipBtn)
+        flipBtn.addTarget(self, action: #selector(didTapFlipBtn), for: .touchUpInside)
         flipBtn.snp.makeConstraints { make in
             make.centerY.equalTo(searchbarSV.snp.centerY)
             make.leading.equalTo(searchView.snp.leading).offset(12)
@@ -141,14 +153,15 @@ extension MainViewController {
         }
     }
     func configureNavigationBar() {
-        let backImage = UIImage(named: "ic_chevron_left")?.withAlignmentRectInsets(UIEdgeInsets(top: 0,
-                                                                                          left: -5,
-                                                                                          bottom: 5,
-                                                                                          right: 0))
+        let backImage = UIImage(named: "ic_chevron_left")?.withAlignmentRectInsets(
+            UIEdgeInsets(top: 0,
+                         left: -9,
+                         bottom: 0,
+                         right: 0))
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        backButton.tintColor = .black
+        backButton.tintColor = .anzaBlack;
         self.navigationItem.backBarButtonItem = backButton
     }
 }
@@ -162,27 +175,62 @@ extension MainViewController {
         present(popUpVC, animated: true)
     }
     @objc func didTapDepatureBtn() {
-        print("de")
         let searchVC = SearchViewController()
+        searchVC.delegate = self
+        searchVC.index = 0
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
     @objc func didTapArrivalBtn() {
         let searchVC = SearchViewController()
+        searchVC.delegate = self
+        searchVC.index = 2
         self.navigationController?.pushViewController(searchVC, animated: true)
+    }
+    @objc func didTapFlipBtn() {
+        guard let depatureText = departureSearchbar.titleLabel?.text,
+              let arrivalText = arrivalSearchbar.titleLabel?.text else {
+            return
+        }
+        if depatureText == "출발 역명을 검색해주세요." || arrivalText == "도착 역명을 검색해주세요." {
+            return
+        }
+        departureSearchbar.configuration = btnConfig(text: arrivalText, color: .anzaBlack)
+        arrivalSearchbar.configuration = btnConfig(text: depatureText, color: .anzaBlack)
     }
 }
 
+// MARK: - SearchViewControllerDelegate
+extension MainViewController: SearchViewControllerDelegate {
+    func didTapStation(id: Int?, line: String, station: String) {
+        guard let id = id else {
+            return
+        }
+        switch id {
+        case 0:
+            departureSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            break
+        case 1:
+            transferSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            break
+        case 2:
+            arrivalSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            break
+        default:
+            departureSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            break
+        }
+    }
+}
 extension MainViewController {
-    func btnConfig(text: String) -> UIButton.Configuration {
+    func btnConfig(text: String, color: UIColor?) -> UIButton.Configuration {
         var buttonConfig: UIButton.Configuration = UIButton.Configuration.plain()
         var title = AttributedString.init(text)
         title.font = UIFont.Roboto(.regular, size: 14)
-        title.foregroundColor = .anzaGray2
+        title.foregroundColor = color
         
         let titleWidth = NSAttributedString(title).size().width
         // 145 = left margin(44) - right margin(51) - left padding(16) - right padding(10) - ic_search width(24)
         let padding = view.width - 145 - ceil(titleWidth)
-        
         buttonConfig.attributedTitle = title
         buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 10)
         buttonConfig.image = UIImage(named: "ic_search")
