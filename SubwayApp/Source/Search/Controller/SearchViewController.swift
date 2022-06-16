@@ -9,7 +9,13 @@ import UIKit
 import SnapKit
 import Then
 
+protocol SearchViewControllerDelegate: AnyObject {
+    func didTapStation(id: Int?, line: String, station: String)
+}
 class SearchViewController: UIViewController {
+    var index: Int?
+    weak var delegate: SearchViewControllerDelegate?
+    
     private let searchBar = UISearchBar().then {
         $0.layer.masksToBounds = true
         $0.layer.borderWidth = 1
@@ -75,12 +81,15 @@ extension SearchViewController {
 // MARK: Configuration
 extension SearchViewController {
     func configureNavigationBar() {
-        let backbuttonSize:CGFloat = self.navigationController?.navigationBar.backIndicatorImage?.size.width ?? 32
+        guard let width = navigationController?.navigationBar.width else { return }
         searchBar.snp.makeConstraints { make in
-            make.width.equalTo(view.width - backbuttonSize)
+            make.width.equalTo(width - 84)
         }
         searchBar.delegate = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 24
+        let rightBarButton = [spacer, UIBarButtonItem(customView: searchBar)]
+        self.navigationItem.rightBarButtonItems = rightBarButton
     }
     func configureLineImage() {
         view.addSubview(lineImage)
@@ -182,8 +191,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        print(filteredData[indexPath.row])
         // Send data to previous view controller
+        guard let id = index else { return }
+        delegate?.didTapStation(id: id, line: filteredData[indexPath.row].호선, station: filteredData[indexPath.row].전철역명)
         navigationController?.popViewController(animated: true)
     }
 }
