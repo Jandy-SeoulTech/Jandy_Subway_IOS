@@ -19,7 +19,7 @@ class HistoryPopUpViewController: UIViewController {
     private let depatureLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.text = "출발역"
-        $0.font = UIFont.Roboto(.regular, size: 14)
+        $0.font = UIFont.NotoSans(.regular, size: 14)
         $0.textAlignment = .center
         $0.textColor = .anzaBlue
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +27,7 @@ class HistoryPopUpViewController: UIViewController {
     private let arrivalLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.text = "도착역"
-        $0.font = UIFont.Roboto(.regular, size: 14)
+        $0.font = UIFont.NotoSans(.regular, size: 14)
         $0.textAlignment = .center
         $0.textColor = .anzaBlue
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -43,21 +43,15 @@ class HistoryPopUpViewController: UIViewController {
         $0.layer.masksToBounds = false
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let dismissBtn = UIButton().then {
-        $0.backgroundColor = .clear
-        $0.setImage(UIImage(named: "ic_xmark"), for: .normal)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
     private let completeBtn = UIButton().then {
         $0.backgroundColor = .anzaGray2
         $0.setTitle("완료", for: .normal)
-        $0.titleLabel?.font = .Roboto(.bold, size: 14)
+        $0.titleLabel?.font = .NotoSans(.semiBold, size: 14)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 8
         $0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     // 현재 선택된 셀 indexpath.row 값
     private var selectedPos = -1;
     // 최근 경로 데이터 모델
@@ -73,7 +67,6 @@ class HistoryPopUpViewController: UIViewController {
         configureContainerView()
         configureCloseBtn()
         configureTitleLabel()
-        configureDismissBtn()
         configureTableLabel()
         configureCompleteBtn()
         configureCollectionView()
@@ -125,7 +118,7 @@ extension HistoryPopUpViewController {
         paragraphStyle.alignment = .center
         paragraphStyle.minimumLineHeight = 25
         let attrString = NSAttributedString(string:"최근 갔던 경로",
-                                            attributes: [.font: UIFont.Roboto(.bold, size: 18) as Any,
+                                            attributes: [.font: UIFont.NotoSans(.semiBold, size: 18) as Any,
                                                          .paragraphStyle: paragraphStyle,
                                                          .foregroundColor: UIColor.anzaBlack as Any])
         titleLabel.attributedText = attrString
@@ -155,15 +148,6 @@ extension HistoryPopUpViewController {
         completeBtn.snp.makeConstraints { make in
             make.bottom.leading.trailing.equalTo(containerView)
             make.height.equalTo(55)
-        }
-    }
-    // 닫기 버튼 설정
-    func configureDismissBtn() {
-        containerView.addSubview(dismissBtn)
-        dismissBtn.addTarget(self, action: #selector(didTapDismissBtn), for: .touchUpInside)
-        dismissBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel.snp.centerY)
-            make.trailing.equalTo(containerView.snp.trailing).offset(-24)
         }
     }
     // 컬렉션 뷰 설정

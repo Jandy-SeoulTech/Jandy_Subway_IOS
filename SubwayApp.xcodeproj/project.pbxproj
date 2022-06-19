@@ -47,6 +47,12 @@
 		EE28E1A52859CEC50008C5AD /* SubwayLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A42859CEC50008C5AD /* SubwayLineCollectionViewCell.swift */; };
 		EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE28E1A62859CEDD0008C5AD /* SearchViewService.swift */; };
 		EE28E1A92859D03A0008C5AD /* Search.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE28E1A82859D03A0008C5AD /* Search.xcassets */; };
+		EE44F646285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */; };
+		EE44F647285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */; };
+		EE44F648285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */; };
+		EE44F649285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
+		EE44F64A285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
+		EE44F64B285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
 		EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */; };
 		EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDD39B0284CD38E001244AB /* Images.xcassets */; };
 		EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD39B6284CDD21001244AB /* MainViewController.swift */; };
@@ -107,6 +113,8 @@
 		EE28E1A42859CEC50008C5AD /* SubwayLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE28E1A62859CEDD0008C5AD /* SearchViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewService.swift; sourceTree = "<group>"; };
 		EE28E1A82859D03A0008C5AD /* Search.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Search.xcassets; sourceTree = "<group>"; };
+		EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.otf"; sourceTree = "<group>"; };
 		EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpViewController.swift; sourceTree = "<group>"; };
 		EEDD39B0284CD38E001244AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EEDD39B6284CDD21001244AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +250,8 @@
 		EE26262F284B9E93002DBA5B /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */,
+				EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */,
 				EE26263E284BA529002DBA5B /* Roboto-Bold.otf */,
 				EE26263F284BA529002DBA5B /* Roboto-Light.otf */,
 				EE26263D284BA529002DBA5B /* Roboto-Medium.otf */,
@@ -469,7 +479,9 @@
 				EE28E1A92859D03A0008C5AD /* Search.xcassets in Resources */,
 				EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */,
 				EE14BEC5281E48770073A210 /* LaunchScreen.storyboard in Resources */,
+				EE44F646285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */,
 				EE14BEC2281E48770073A210 /* Assets.xcassets in Resources */,
+				EE44F649285F373D00FA00FB /* NotoSans-Regular.otf in Resources */,
 				EE262649284BA529002DBA5B /* Roboto-Light.otf in Resources */,
 				EE262640284BA529002DBA5B /* Roboto-Regular.otf in Resources */,
 			);
@@ -480,9 +492,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE26264A284BA529002DBA5B /* Roboto-Light.otf in Resources */,
+				EE44F647285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */,
 				EE262647284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
 				EE262641284BA529002DBA5B /* Roboto-Regular.otf in Resources */,
 				EE262644284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
+				EE44F64A285F373D00FA00FB /* NotoSans-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,9 +505,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE26264B284BA529002DBA5B /* Roboto-Light.otf in Resources */,
+				EE44F648285F373D00FA00FB /* NotoSans-SemiBold.ttf in Resources */,
 				EE262648284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
 				EE262642284BA529002DBA5B /* Roboto-Regular.otf in Resources */,
 				EE262645284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
+				EE44F64B285F373D00FA00FB /* NotoSans-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

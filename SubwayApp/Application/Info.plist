@@ -8,6 +8,8 @@
 		<string>Roboto-Light.otf</string>
 		<string>Roboto-Medium.otf</string>
 		<string>Roboto-Regular.otf</string>
+		<string>NotoSans-Regular.otf</string>
+		<string>NotoSans-SemiBold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

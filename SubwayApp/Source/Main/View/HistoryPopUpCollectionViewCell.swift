@@ -15,7 +15,7 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     private var depatureConstraint: SnapKit.ConstraintItem?
     private let depatureLabel = UILabel().then {
         $0.numberOfLines = 0
-        $0.font = .Roboto(.regular, size: 14)
+        $0.font = .NotoSans(.regular, size: 14)
         $0.textColor = .anzaBlack
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +27,7 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     private var arrivalConstraint: SnapKit.ConstraintItem?
     private let arrivalLabel = UILabel().then {
         $0.numberOfLines = 0
-        $0.font = .Roboto(.regular, size: 14)
+        $0.font = .NotoSans(.regular, size: 14)
         $0.textColor = .anzaBlack
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false

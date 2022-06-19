@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         $0.placeholder = ""
         $0.searchTextField.backgroundColor = .white
         $0.searchTextField.textColor = .anzaBlack
-        $0.searchTextField.font = .Roboto(.regular, size: 14)
+        $0.searchTextField.font = .NotoSans(.regular, size: 14)
     }
     private let lineImage = UIImageView().then {
         $0.image = UIImage(named: "ic_select")

@@ -8,14 +8,23 @@
 import UIKit
 
 extension UIFont {
-    public enum RobotoType: String {
+    public enum FontType: String {
         case bold = "Bold"
         case light = "Light"
         case medium = "Medium"
         case regular = "Regular"
+        case semiBold = "SemiBold"
     }
 
-    static func Roboto(_ type: RobotoType, size: CGFloat) -> UIFont {
+    static func Roboto(_ type: FontType, size: CGFloat) -> UIFont {
         return UIFont(name: "Roboto-\(type.rawValue)", size: size)!
+    }
+    static func NotoSans(_ type: FontType, size: CGFloat) -> UIFont {
+        if type == .regular {
+            return UIFont(name: "NotoSansKR-Regular", size: size)!
+        } else if(type == .semiBold) {
+            return UIFont(name: "NotoSans-SemiBold", size: size)!
+        }
+        return Roboto(type, size: size)
     }
 }
