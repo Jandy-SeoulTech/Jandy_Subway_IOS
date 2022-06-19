@@ -20,19 +20,22 @@ class MainViewController: UIViewController {
         $0.layer.shadowOffset = .zero
         $0.layer.shadowRadius = 12
         $0.layer.masksToBounds = false
-        $0.adjustsImageWhenHighlighted = false
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let flipBtn = UIButton().then {
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "ic_flip"), for: .normal)
-        $0.adjustsImageWhenHighlighted = false
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let busBtn = UIButton().then {
         $0.backgroundColor = .clear
-        $0.adjustsImageWhenHighlighted = false
         $0.setImage(UIImage(named: "ic_bus"), for: .normal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    /// Chips: 지금 탑승 중인 열차가 있어요.
+    private let chips = UIButton().then {
+        $0.backgroundColor = .anzaBlack?.withAlphaComponent(0.85)
+        $0.layer.cornerRadius = 20
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var departureSearchbar = UIButton().then {
@@ -71,6 +74,8 @@ class MainViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = true;
     }
     private var searchViewHeightConstraint = 107
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -123,7 +128,7 @@ extension MainViewController {
         
         searchbarSV.addArrangedSubview(departureSearchbar)
         departureSearchbar.addTarget(self, action: #selector(didTapDepatureBtn), for: .touchUpInside)
-        departureSearchbar.configuration = btnConfig(text: "출발 역명을 검색해주세요.", color: .anzaGray2)
+        departureSearchbar.configuration = searchbarConfig(text: "출발 역명을 검색해주세요.", color: .anzaGray2)
         departureSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
             make.height.equalTo(41)
@@ -131,7 +136,7 @@ extension MainViewController {
         
         searchbarSV.addArrangedSubview(arrivalSearchbar)
         arrivalSearchbar.addTarget(self, action: #selector(didTapArrivalBtn), for: .touchUpInside)
-        arrivalSearchbar.configuration = btnConfig(text: "도착 역명을 검색해주세요.", color: .anzaGray2)
+        arrivalSearchbar.configuration = searchbarConfig(text: "도착 역명을 검색해주세요.", color: .anzaGray2)
         arrivalSearchbar.snp.makeConstraints { make in
             make.width.equalTo(view.width - 95)
             make.height.equalTo(41)
@@ -164,6 +169,22 @@ extension MainViewController {
         backButton.tintColor = .anzaBlack;
         self.navigationItem.backBarButtonItem = backButton
     }
+    func configureChipBtn() {
+        var buttonConfig: UIButton.Configuration = UIButton.Configuration.plain()
+        var title = AttributedString.init("지금 탑승 중인 열차가 있어요!")
+        title.font = UIFont.NotoSans(.regular, size: 14)
+        title.foregroundColor = .white
+        buttonConfig.attributedTitle = title
+        buttonConfig.titleAlignment = .center
+        buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+        chips.configuration = buttonConfig
+        searchView.addSubview(chips)
+        chips.snp.makeConstraints { make in
+            make.top.equalTo(busBtn.snp.bottom).offset(2)
+            make.trailing.equalTo(searchView.snp.trailing).offset(-21)
+        }
+        
+    }
 }
 
 // MARK: - Action function
@@ -194,8 +215,8 @@ extension MainViewController {
         if depatureText == "출발 역명을 검색해주세요." || arrivalText == "도착 역명을 검색해주세요." {
             return
         }
-        departureSearchbar.configuration = btnConfig(text: arrivalText, color: .anzaBlack)
-        arrivalSearchbar.configuration = btnConfig(text: depatureText, color: .anzaBlack)
+        departureSearchbar.configuration = searchbarConfig(text: arrivalText, color: .anzaBlack)
+        arrivalSearchbar.configuration = searchbarConfig(text: depatureText, color: .anzaBlack)
     }
 }
 
@@ -207,25 +228,25 @@ extension MainViewController: SearchViewControllerDelegate {
         }
         switch id {
         case 0:
-            departureSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            departureSearchbar.configuration = searchbarConfig(text: station, color: .anzaBlack)
             break
         case 1:
-            transferSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            transferSearchbar.configuration = searchbarConfig(text: station, color: .anzaBlack)
             break
         case 2:
-            arrivalSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            arrivalSearchbar.configuration = searchbarConfig(text: station, color: .anzaBlack)
             break
         default:
-            departureSearchbar.configuration = btnConfig(text: station, color: .anzaBlack)
+            departureSearchbar.configuration = searchbarConfig(text: station, color: .anzaBlack)
             break
         }
     }
 }
 extension MainViewController {
-    func btnConfig(text: String, color: UIColor?) -> UIButton.Configuration {
+    func searchbarConfig(text: String, color: UIColor?) -> UIButton.Configuration {
         var buttonConfig: UIButton.Configuration = UIButton.Configuration.plain()
         var title = AttributedString.init(text)
-        title.font = UIFont.Roboto(.regular, size: 14)
+        title.font = UIFont.NotoSans(.regular, size: 14)
         title.foregroundColor = color
         
         let titleWidth = NSAttributedString(title).size().width
@@ -238,6 +259,7 @@ extension MainViewController {
         buttonConfig.imagePadding = padding
         return buttonConfig
     }
+    /// 현재 뷰의 상태 바 높이를 가져오는 메서드
     func getStatusBarHeight() -> CGFloat {
         var statusBarHeight: CGFloat = 0
         if #available(iOS 15.0, *) {
