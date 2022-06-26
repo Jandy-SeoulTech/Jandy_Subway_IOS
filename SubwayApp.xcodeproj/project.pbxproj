@@ -54,6 +54,10 @@
 		EE44F64A285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
 		EE44F64B285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
 		EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */; };
+		EEA2681F28683D02003DA674 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA2681E28683D02003DA674 /* PathView.swift */; };
+		EEB2C352286753A900E3561D /* PathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2C351286753A900E3561D /* PathViewController.swift */; };
+		EEB2C35428675E5A00E3561D /* ShortestTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2C35328675E5A00E3561D /* ShortestTimeView.swift */; };
+		EEB2C3562867610100E3561D /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2C3552867610100E3561D /* NSAttributedString+Extension.swift */; };
 		EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDD39B0284CD38E001244AB /* Images.xcassets */; };
 		EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD39B6284CDD21001244AB /* MainViewController.swift */; };
 		EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */; };
@@ -116,6 +120,11 @@
 		EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.otf"; sourceTree = "<group>"; };
 		EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpViewController.swift; sourceTree = "<group>"; };
+		EEA2681E28683D02003DA674 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
+		EEB2C351286753A900E3561D /* PathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewController.swift; sourceTree = "<group>"; };
+		EEB2C35328675E5A00E3561D /* ShortestTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortestTimeView.swift; sourceTree = "<group>"; };
+		EEB2C3552867610100E3561D /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		EEB2C3572867635300E3561D /* NotoSans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.otf"; sourceTree = "<group>"; };
 		EEDD39B0284CD38E001244AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EEDD39B6284CDD21001244AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +238,7 @@
 		EE26262B284B9DB6002DBA5B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EEB2C350286752C300E3561D /* Path */,
 				EE28E1982859CE420008C5AD /* Search */,
 				EEDD39B5284CDD19001244AB /* Main */,
 				EE14BEBC281E48760073A210 /* ViewController.swift */,
@@ -250,6 +260,7 @@
 		EE26262F284B9E93002DBA5B /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				EEB2C3572867635300E3561D /* NotoSans-Medium.otf */,
 				EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */,
 				EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */,
 				EE26263E284BA529002DBA5B /* Roboto-Bold.otf */,
@@ -312,6 +323,7 @@
 				EE262626284B9D47002DBA5B /* CALayer+Extension.swift */,
 				EE262628284B9D7C002DBA5B /* UIView+Extension.swift */,
 				EE262638284BA459002DBA5B /* Font+Extension.swift */,
+				EEB2C3552867610100E3561D /* NSAttributedString+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -323,6 +335,16 @@
 				EEDD39B6284CDD21001244AB /* MainViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		EEB2C350286752C300E3561D /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				EEB2C351286753A900E3561D /* PathViewController.swift */,
+				EEB2C35328675E5A00E3561D /* ShortestTimeView.swift */,
+				EEA2681E28683D02003DA674 /* PathView.swift */,
+			);
+			path = Path;
 			sourceTree = "<group>";
 		};
 		EEDD39B5284CDD19001244AB /* Main */ = {
@@ -626,8 +648,10 @@
 				EE26264E284BBD46002DBA5B /* APIService.swift in Sources */,
 				EE262629284B9D7C002DBA5B /* UIView+Extension.swift in Sources */,
 				EE28E1A32859CEAE0008C5AD /* Subway.swift in Sources */,
+				EEB2C352286753A900E3561D /* PathViewController.swift in Sources */,
 				EE28E19D2859CE770008C5AD /* LineSelectModalViewController.swift in Sources */,
 				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
+				EEB2C3562867610100E3561D /* NSAttributedString+Extension.swift in Sources */,
 				EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */,
 				EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */,
 				EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */,
@@ -636,7 +660,9 @@
 				EE28E19F2859CE8E0008C5AD /* SearchViewController.swift in Sources */,
 				EE262639284BA459002DBA5B /* Font+Extension.swift in Sources */,
 				EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */,
+				EEA2681F28683D02003DA674 /* PathView.swift in Sources */,
 				EE262627284B9D47002DBA5B /* CALayer+Extension.swift in Sources */,
+				EEB2C35428675E5A00E3561D /* ShortestTimeView.swift in Sources */,
 				EE14BEBB281E48760073A210 /* SceneDelegate.swift in Sources */,
 				EE262625284B9CBF002DBA5B /* UIColor+Extension.swift in Sources */,
 				EE28E1A52859CEC50008C5AD /* SubwayLineCollectionViewCell.swift in Sources */,

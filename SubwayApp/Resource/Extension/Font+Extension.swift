@@ -24,6 +24,8 @@ extension UIFont {
             return UIFont(name: "NotoSansKR-Regular", size: size)!
         } else if(type == .semiBold) {
             return UIFont(name: "NotoSans-SemiBold", size: size)!
+        } else if(type == .medium) {
+            return UIFont(name: "NotoSansKR-Medium", size: size)!
         }
         return Roboto(type, size: size)
     }

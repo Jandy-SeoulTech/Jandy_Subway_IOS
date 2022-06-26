@@ -10,6 +10,7 @@
 		<string>Roboto-Regular.otf</string>
 		<string>NotoSans-Regular.otf</string>
 		<string>NotoSans-SemiBold.ttf</string>
+		<string>NotoSans-Medium.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
