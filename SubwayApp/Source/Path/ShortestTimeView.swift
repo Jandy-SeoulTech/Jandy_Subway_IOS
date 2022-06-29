@@ -10,8 +10,6 @@ import SnapKit
 import Then
 
 class ShortestTimeView: UIView {
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
