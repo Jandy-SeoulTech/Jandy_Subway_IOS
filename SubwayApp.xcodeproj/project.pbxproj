@@ -168,6 +168,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EE090274286C4BC800CCEC13 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
+				EE14BEC1281E48770073A210 /* Assets.xcassets */,
+				EEDD39B0284CD38E001244AB /* Images.xcassets */,
+				EE28E1A82859D03A0008C5AD /* Search.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		EE090275286C4BDD00CCEC13 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		EE090276286C4BFF00CCEC13 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EEB2C351286753A900E3561D /* PathViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE090277286C4C0600CCEC13 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EEB2C35328675E5A00E3561D /* ShortestTimeView.swift */,
+				EEA2681E28683D02003DA674 /* PathView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EE14BEAC281E48760073A210 = {
 			isa = PBXGroup;
 			children = (
@@ -202,12 +238,9 @@
 		EE26262A284B9DAC002DBA5B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EE090274286C4BC800CCEC13 /* Assets */,
 				EE6739E12824EF730058A702 /* Extension */,
 				EE26262F284B9E93002DBA5B /* Font */,
-				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
-				EE14BEC1281E48770073A210 /* Assets.xcassets */,
-				EEDD39B0284CD38E001244AB /* Images.xcassets */,
-				EE28E1A82859D03A0008C5AD /* Search.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -215,10 +248,10 @@
 		EE26262B284B9DB6002DBA5B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EE090275286C4BDD00CCEC13 /* Splash */,
 				EEB2C350286752C300E3561D /* Path */,
 				EE28E1982859CE420008C5AD /* Search */,
 				EEDD39B5284CDD19001244AB /* Main */,
-				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -259,8 +292,8 @@
 		EE28E1982859CE420008C5AD /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				EE28E19B2859CE560008C5AD /* View */,
 				EE28E19A2859CE530008C5AD /* Model */,
+				EE28E19B2859CE560008C5AD /* View */,
 				EE28E1992859CE4E0008C5AD /* Controller */,
 			);
 			path = Search;
@@ -316,9 +349,8 @@
 		EEB2C350286752C300E3561D /* Path */ = {
 			isa = PBXGroup;
 			children = (
-				EEB2C351286753A900E3561D /* PathViewController.swift */,
-				EEB2C35328675E5A00E3561D /* ShortestTimeView.swift */,
-				EEA2681E28683D02003DA674 /* PathView.swift */,
+				EE090277286C4C0600CCEC13 /* View */,
+				EE090276286C4BFF00CCEC13 /* Controller */,
 			);
 			path = Path;
 			sourceTree = "<group>";
@@ -327,8 +359,8 @@
 			isa = PBXGroup;
 			children = (
 				EEF6F00C28524D0E00FD69A8 /* Model */,
-				EE705D2E2850E3A600A2F910 /* Controller */,
 				EEEAFCD828508CCC004DD527 /* View */,
+				EE705D2E2850E3A600A2F910 /* Controller */,
 			);
 			path = Main;
 			sourceTree = "<group>";
