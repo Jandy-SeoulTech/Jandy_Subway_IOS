@@ -13,7 +13,6 @@ protocol SearchViewControllerDelegate: AnyObject {
     func didTapStation(id: Int?, line: String, station: String)
 }
 class SearchViewController: UIViewController {
-    var index: Int?
     weak var delegate: SearchViewControllerDelegate?
     
     private let searchBar = UISearchBar().then {
@@ -35,6 +34,7 @@ class SearchViewController: UIViewController {
     }
     private var searchResultCollectionView: UICollectionView! = nil
     
+    var index: Int?
     var patialText: String = ""
     var filteredData = [Information]()
     var model = [Information]()
