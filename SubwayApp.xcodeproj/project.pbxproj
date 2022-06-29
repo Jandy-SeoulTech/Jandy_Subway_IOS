@@ -10,14 +10,12 @@
 		2B9B043799472FE2F5C137DC /* Pods_SubwayAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C735FEFAF13160854B1D39 /* Pods_SubwayAppTests.framework */; };
 		4EC16BDD14634A9E9A380DA1 /* Pods_SubwayApp_SubwayAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6EACEF7698D09D3B8C9BA2 /* Pods_SubwayApp_SubwayAppUITests.framework */; };
 		663694A2DED5B00510A31E88 /* Pods_SubwayApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2855969EFEF4AD76C8D7661 /* Pods_SubwayApp.framework */; };
+		EE090271286C3F9C00CCEC13 /* SubwayMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE090270286C3F9C00CCEC13 /* SubwayMapView.swift */; };
+		EE090273286C3FB100CCEC13 /* SearchbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE090272286C3FB100CCEC13 /* SearchbarView.swift */; };
 		EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEB8281E48760073A210 /* AppDelegate.swift */; };
 		EE14BEBB281E48760073A210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEBA281E48760073A210 /* SceneDelegate.swift */; };
-		EE14BEBD281E48760073A210 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEBC281E48760073A210 /* ViewController.swift */; };
 		EE14BEC2281E48770073A210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE14BEC1281E48770073A210 /* Assets.xcassets */; };
 		EE14BEC5281E48770073A210 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */; };
-		EE14BED0281E48770073A210 /* SubwayAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BECF281E48770073A210 /* SubwayAppTests.swift */; };
-		EE14BEDA281E48770073A210 /* SubwayAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BED9281E48770073A210 /* SubwayAppUITests.swift */; };
-		EE14BEDC281E48770073A210 /* SubwayAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */; };
 		EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE262622284B9A9C002DBA5B /* Colors.xcassets */; };
 		EE262625284B9CBF002DBA5B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE262624284B9CBF002DBA5B /* UIColor+Extension.swift */; };
 		EE262627284B9D47002DBA5B /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE262626284B9D47002DBA5B /* CALayer+Extension.swift */; };
@@ -88,18 +86,16 @@
 		77C735FEFAF13160854B1D39 /* Pods_SubwayAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9824F45835284B33E9849D7A /* Pods-SubwayApp-SubwayAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SubwayApp-SubwayAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-SubwayApp-SubwayAppUITests/Pods-SubwayApp-SubwayAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF6EACEF7698D09D3B8C9BA2 /* Pods_SubwayApp_SubwayAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SubwayApp_SubwayAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE090270286C3F9C00CCEC13 /* SubwayMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayMapView.swift; sourceTree = "<group>"; };
+		EE090272286C3FB100CCEC13 /* SearchbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchbarView.swift; sourceTree = "<group>"; };
 		EE14BEB5281E48760073A210 /* SubwayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubwayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE14BEB8281E48760073A210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE14BEBA281E48760073A210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EE14BEBC281E48760073A210 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EE14BEC1281E48770073A210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE14BEC4281E48770073A210 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE14BEC6281E48770073A210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE14BECB281E48770073A210 /* SubwayAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubwayAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE14BECF281E48770073A210 /* SubwayAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppTests.swift; sourceTree = "<group>"; };
 		EE14BED5281E48770073A210 /* SubwayAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubwayAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE14BED9281E48770073A210 /* SubwayAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITests.swift; sourceTree = "<group>"; };
-		EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EE262622284B9A9C002DBA5B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		EE262624284B9CBF002DBA5B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		EE262626284B9D47002DBA5B /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
@@ -176,8 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				EE14BEB7281E48760073A210 /* SubwayApp */,
-				EE14BECE281E48770073A210 /* SubwayAppTests */,
-				EE14BED8281E48770073A210 /* SubwayAppUITests */,
 				EE14BEB6281E48760073A210 /* Products */,
 				F703FAA519E4BB4BF556D710 /* Pods */,
 				4FDDE7E28BDC84C5CF5360BE /* Frameworks */,
@@ -205,30 +199,13 @@
 			path = SubwayApp;
 			sourceTree = "<group>";
 		};
-		EE14BECE281E48770073A210 /* SubwayAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				EE14BECF281E48770073A210 /* SubwayAppTests.swift */,
-			);
-			path = SubwayAppTests;
-			sourceTree = "<group>";
-		};
-		EE14BED8281E48770073A210 /* SubwayAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				EE14BED9281E48770073A210 /* SubwayAppUITests.swift */,
-				EE14BEDB281E48770073A210 /* SubwayAppUITestsLaunchTests.swift */,
-			);
-			path = SubwayAppUITests;
-			sourceTree = "<group>";
-		};
 		EE26262A284B9DAC002DBA5B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EE6739E12824EF730058A702 /* Extension */,
 				EE26262F284B9E93002DBA5B /* Font */,
 				EE262622284B9A9C002DBA5B /* Colors.xcassets */,
 				EE14BEC1281E48770073A210 /* Assets.xcassets */,
-				EE6739E12824EF730058A702 /* Extension */,
 				EEDD39B0284CD38E001244AB /* Images.xcassets */,
 				EE28E1A82859D03A0008C5AD /* Search.xcassets */,
 			);
@@ -241,7 +218,6 @@
 				EEB2C350286752C300E3561D /* Path */,
 				EE28E1982859CE420008C5AD /* Search */,
 				EEDD39B5284CDD19001244AB /* Main */,
-				EE14BEBC281E48760073A210 /* ViewController.swift */,
 				EE14BEC3281E48770073A210 /* LaunchScreen.storyboard */,
 			);
 			path = Source;
@@ -361,6 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */,
+				EE090270286C3F9C00CCEC13 /* SubwayMapView.swift */,
+				EE090272286C3FB100CCEC13 /* SearchbarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -647,16 +625,17 @@
 			files = (
 				EE26264E284BBD46002DBA5B /* APIService.swift in Sources */,
 				EE262629284B9D7C002DBA5B /* UIView+Extension.swift in Sources */,
+				EE090271286C3F9C00CCEC13 /* SubwayMapView.swift in Sources */,
 				EE28E1A32859CEAE0008C5AD /* Subway.swift in Sources */,
 				EEB2C352286753A900E3561D /* PathViewController.swift in Sources */,
 				EE28E19D2859CE770008C5AD /* LineSelectModalViewController.swift in Sources */,
-				EE14BEBD281E48760073A210 /* ViewController.swift in Sources */,
 				EEB2C3562867610100E3561D /* NSAttributedString+Extension.swift in Sources */,
 				EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */,
 				EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */,
 				EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EEF6F00E28524D1700FD69A8 /* History.swift in Sources */,
+				EE090273286C3FB100CCEC13 /* SearchbarView.swift in Sources */,
 				EE28E19F2859CE8E0008C5AD /* SearchViewController.swift in Sources */,
 				EE262639284BA459002DBA5B /* Font+Extension.swift in Sources */,
 				EEDD39B7284CDD21001244AB /* MainViewController.swift in Sources */,
@@ -676,7 +655,6 @@
 			files = (
 				EE26263A284BA459002DBA5B /* Font+Extension.swift in Sources */,
 				EE26264F284BBD46002DBA5B /* APIService.swift in Sources */,
-				EE14BED0281E48770073A210 /* SubwayAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,9 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE26263B284BA459002DBA5B /* Font+Extension.swift in Sources */,
-				EE14BEDA281E48770073A210 /* SubwayAppUITests.swift in Sources */,
 				EE262650284BBD46002DBA5B /* APIService.swift in Sources */,
-				EE14BEDC281E48770073A210 /* SubwayAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +745,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -824,7 +800,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -848,6 +824,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -875,6 +852,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
