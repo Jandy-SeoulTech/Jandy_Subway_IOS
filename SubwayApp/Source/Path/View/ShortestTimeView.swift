@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ShortestTimeView: UIView {
+class ShortestTimeView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
