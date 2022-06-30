@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
         $0.layer.shadowOffset = .zero
         $0.layer.shadowRadius = 12
         $0.layer.masksToBounds = false
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private lazy var searchbarView = SearchbarView().then {
         $0.backgroundColor = .white
@@ -29,11 +28,8 @@ class MainViewController: UIViewController {
         $0.layer.shadowRadius = 3
         $0.layer.shadowOpacity = 1.0
         $0.layer.shadowOffset = CGSize(width: 0, height: 6)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private lazy var subwayMapView = SubwayMapView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var subwayMapView = SubwayMapView()
     private var searchViewHeightConstraint = 107
     
     // MARK: - Life Cycle
@@ -71,7 +67,7 @@ extension MainViewController {
         view.addSubview(searchbarView)
         searchbarView.delegate = self
         searchbarView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(getStatusBarHeight())
+            make.top.equalToSuperview().offset(view.getStatusBarHeight())
             //make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(searchViewHeightConstraint)
@@ -142,21 +138,5 @@ extension MainViewController: SearchViewControllerDelegate {
         default:
             break
         }
-    }
-}
-
-extension MainViewController {
-    /// 현재 뷰의 상태 바 높이를 가져오는 메서드
-    func getStatusBarHeight() -> CGFloat {
-        var statusBarHeight: CGFloat = 0
-        if #available(iOS 15.0, *) {
-            let scenes = UIApplication.shared.connectedScenes
-            let windowScene = scenes.first as? UIWindowScene
-            let window = windowScene?.windows.first
-            statusBarHeight = window?.safeAreaInsets.top ?? 0
-        } else {
-            statusBarHeight = UIApplication.shared.statusBarFrame.height
-        }
-        return statusBarHeight
     }
 }

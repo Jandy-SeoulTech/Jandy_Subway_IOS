@@ -14,90 +14,66 @@ class PathView: UIView {
     private let depatureTimeButton = UIButton().then {
         $0.setTitle("00:00", for: .normal)
         $0.backgroundColor = .lightGray
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     /// 출발역 호선 아이콘
     private let depatureLineIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_six_circle")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     /// 출발역 이름
     private let depatureStationLabel = UILabel().then {
-        $0.text = "공릉"
-        $0.textColor = .anzaBlack
-        $0.font = UIFont.NotoSans(.semiBold, size: 16)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b3(text: "돌곶이", color: .anzaBlack)
     }
     /// 도착역 시간
     private let arrivalTimeLabel = UILabel().then {
-        $0.text = "00:00"
-        $0.textColor = .anzaGray1
-        $0.font = UIFont.NotoSans(.regular, size: 12)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b7(text: "05:29", color: .anzaGray1)
     }
     /// 하차 아이콘
     private let subwayGetOutIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_six_circle")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     /// 하차역 이름
     private let arrivalStationLabel = UILabel().then {
-        $0.text = "공릉"
-        $0.textColor = .anzaBlack
-        $0.font = UIFont.NotoSans(.semiBold, size: 16)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b3(text: "태릉입구", color: .anzaBlack)
     }
-    /// 첫번째 기차 시간 정보
+    /// 첫번째 기차 도착까지 남은 시간
     private let firstSubwayTimeLabel = UILabel().then {
-        $0.text = "13분 43초"
-        $0.textColor = .anzaRed
-        $0.font = UIFont.NotoSans(.regular, size: 14)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b2(text: "3분 43초", color: .anzaRed)
     }
-    /// 첫번째 기차 도착 정보
+    /// 첫번째 기차 목적지 정보
     private let firstSubwayDestinationLabel = UILabel().then {
-        $0.text = "봉화산행"
-        $0.textColor = .anzaBlack
-        $0.font = UIFont.NotoSans(.regular, size: 14)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
     }
     // 첫번째 기차 혼잡도
     private let firstSubwayCongestionImageView = UIImageView().then {
         $0.image = UIImage(named: "ic_normal")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    /// 두번째 기차 도착까지 남은 시간
     private let secondSubwayTimeLabel = UILabel().then {
-        $0.text = "12분"
-        $0.textColor = .anzaRed
-        $0.font = UIFont.NotoSans(.regular, size: 14)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b2(text: "3분 44초", color: .anzaRed)
     }
+    /// 두번째 기차 목적지 정보
     private let secondSubwayDestinationLabel = UILabel().then {
-        $0.text = "봉화산행"
-        $0.textColor = .anzaBlack
-        $0.font = UIFont.NotoSans(.regular, size: 14)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
     }
+    // 두번째 기차 혼잡도
     private let secondSubwayCongestionImageView = UIImageView().then {
         $0.image = UIImage(named: "ic_normal")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    // 0개역 이동 (0분)
     private let stationListToggleLabel = UILabel().then {
-        $0.text = "2개역 이동 (6분)"
-        $0.textColor = .anzaGray1
-        $0.font = UIFont.NotoSans(.regular, size: 14)
-        $0.backgroundColor = .white
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.attributedText = .anza_b2(text: "2개역 이동 (6분)", color: .anzaGray1)
+        $0.isUserInteractionEnabled = true
     }
     private let stationListToggleImageView = UIImageView().then {
         $0.image = UIImage(named: "ic_chevron_down")
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isUserInteractionEnabled = true
     }
-    var straightLineHeightConstraint: Constraint!
     private let straightLine = UIView().then {
         $0.backgroundColor = .line6
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    private var straightLineHeight = 80
+    private var toggled = false
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,13 +84,13 @@ class PathView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureDepatureTimeButton()
-        depatureTimeButton.addTarget(self, action: #selector(didTapSubwayListToggleButton), for: .touchUpInside)
         configureDepatureLineView()
         configureDepatureStationLabel()
         
         configureStraightLine()
         
         configureArrivalLineView()
+        configureArrivalTimeLabel()
         configureArrivalStationLabel()
         
         configureFirstSubwayInformation()
@@ -123,9 +99,10 @@ class PathView: UIView {
     }
 }
 extension PathView {
-    func configure() {
+    func configure(with model: [Path]) {
         
     }
+    // MARK: 출발 역 관련 configure
     func configureDepatureTimeButton() {
         addSubview(depatureTimeButton)
         depatureTimeButton.snp.makeConstraints { make in
@@ -151,12 +128,16 @@ extension PathView {
             make.height.lessThanOrEqualTo(depatureLineIcon)
         }
     }
-    func configureArrivalTimeLabel() {
-        addSubview(arrivalTimeLabel)
-        arrivalTimeLabel.snp.makeConstraints { make in
-            
+    func configureStraightLine() {
+        addSubview(straightLine)
+        straightLine.snp.makeConstraints { make in
+            make.centerX.equalTo(depatureLineIcon)
+            make.top.equalTo(depatureLineIcon.snp.bottom)
+            make.width.equalTo(2)
+            make.height.equalTo(straightLineHeight).priority(250)
         }
     }
+    // MARK: 도착역 관련 configure
     func configureArrivalLineView() {
         addSubview(subwayGetOutIcon)
         subwayGetOutIcon.snp.makeConstraints { make in
@@ -165,19 +146,17 @@ extension PathView {
             make.width.height.equalTo(28)
         }
     }
-    func configureStraightLine() {
-        addSubview(straightLine)
-        straightLine.snp.makeConstraints { make in
-            make.centerX.equalTo(depatureLineIcon)
-            make.top.equalTo(depatureLineIcon.snp.bottom)
-            make.width.equalTo(2)
-            straightLineHeightConstraint = make.height.equalTo(150).constraint
-        }
-    }
     func configureArrivalStationLabel() {
         addSubview(arrivalStationLabel)
         arrivalStationLabel.snp.makeConstraints { make in
             make.leading.equalTo(depatureStationLabel)
+            make.centerY.equalTo(subwayGetOutIcon)
+        }
+    }
+    func configureArrivalTimeLabel() {
+        addSubview(arrivalTimeLabel)
+        arrivalTimeLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(depatureTimeButton).offset(-6)
             make.centerY.equalTo(subwayGetOutIcon)
         }
     }
@@ -216,10 +195,14 @@ extension PathView {
         }
     }
     func configureStationListToggleButton() {
-        addSubview(stationListToggleLabel)
         addSubview(stationListToggleImageView)
+        addSubview(stationListToggleLabel)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSubwayListToggleButton))
+        stationListToggleLabel.addGestureRecognizer(tapGesture)
+        stationListToggleImageView.addGestureRecognizer(tapGesture)
         stationListToggleLabel.snp.makeConstraints { make in
             make.leading.equalTo(depatureStationLabel)
+            make.height.equalTo(19)
             make.top.equalTo(secondSubwayDestinationLabel.snp.bottom).offset(8)
         }
         stationListToggleImageView.snp.makeConstraints { make in
@@ -233,7 +216,15 @@ extension PathView {
 
 extension PathView {
     @objc func didTapSubwayListToggleButton() {
-        UIView.animate(withDuration: 0.1) {
+        toggled.toggle()
+        straightLineHeight = toggled ? 120 : 80
+        straightLine.snp.remakeConstraints { make in
+            make.centerX.equalTo(depatureLineIcon)
+            make.top.equalTo(depatureLineIcon.snp.bottom)
+            make.width.equalTo(2)
+            make.height.equalTo(straightLineHeight).priority(250)
+        }
+        UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
     }

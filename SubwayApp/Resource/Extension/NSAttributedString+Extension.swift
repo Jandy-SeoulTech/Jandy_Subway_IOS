@@ -10,7 +10,7 @@ import UIKit
 
 
 extension NSAttributedString {
-    static func anza_t1(with text: String) -> NSAttributedString {
+    static func anza_t1(text: String, color: UIColor?) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.minimumLineHeight = 25
@@ -18,7 +18,47 @@ extension NSAttributedString {
             string: text,
             attributes: [.font: UIFont.NotoSans(.semiBold, size: 24) as Any,
                          .paragraphStyle: paragraphStyle,
-                         .foregroundColor: UIColor.anzaBlack as Any])
+                         .foregroundColor: color as Any])
+        return attrString
+    }
+    static func anza_b4_2(text: String, color: UIColor?) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.NotoSans(.regular, size: 16) as Any,
+                         .paragraphStyle: paragraphStyle,
+                         .foregroundColor: color as Any])
+        return attrString
+    }
+    static func anza_b2(text: String, color: UIColor?) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.NotoSans(.regular, size: 14) as Any,
+                         .paragraphStyle: paragraphStyle,
+                         .foregroundColor: color as Any])
+        return attrString
+    }
+    static func anza_b3(text: String, color: UIColor?) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.NotoSans(.semiBold, size: 16) as Any,
+                         .paragraphStyle: paragraphStyle,
+                         .foregroundColor: color as Any])
+        return attrString
+    }
+    static func anza_b7(text: String, color: UIColor?) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.NotoSans(.regular, size: 12) as Any,
+                         .paragraphStyle: paragraphStyle,
+                         .foregroundColor: color as Any])
         return attrString
     }
 }
