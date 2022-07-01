@@ -11,12 +11,15 @@ import Then
 
 class PathView: UIView {
     /// 출발역 시간 버튼
-    private let depatureTimeButton = UIButton().then {
-        $0.setTitle("00:00", for: .normal)
-        $0.backgroundColor = .lightGray
+    private lazy var depatureTimeButton = UIButton().then {
+        $0.configuration = setDepartureTimeButtonUI(title: "05:23")
+        $0.backgroundColor = UIColor(hex: 0xf8f8f8)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.anzaLightGray?.cgColor
+        $0.layer.cornerRadius = 11
     }
     /// 출발역 호선 아이콘
-    private let depatureLineIcon = UIImageView().then {
+    private let departureIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_six_circle")
     }
     /// 출발역 이름
@@ -28,7 +31,7 @@ class PathView: UIView {
         $0.attributedText = .anza_b7(text: "05:29", color: .anzaGray1)
     }
     /// 하차 아이콘
-    private let subwayGetOutIcon = UIImageView().then {
+    private let arrivalIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_six_circle")
     }
     /// 하차역 이름
@@ -44,8 +47,8 @@ class PathView: UIView {
         $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
     }
     // 첫번째 기차 혼잡도
-    private let firstSubwayCongestionImageView = UIImageView().then {
-        $0.image = UIImage(named: "ic_normal")
+    private let firstSubwayCongestionIcon = UIImageView().then {
+        $0.image = UIImage(named: "ic_normal_path")
     }
     /// 두번째 기차 도착까지 남은 시간
     private let secondSubwayTimeLabel = UILabel().then {
@@ -56,24 +59,26 @@ class PathView: UIView {
         $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
     }
     // 두번째 기차 혼잡도
-    private let secondSubwayCongestionImageView = UIImageView().then {
-        $0.image = UIImage(named: "ic_normal")
+    private let secondSubwayCongestionIcon = UIImageView().then {
+        $0.image = UIImage(named: "ic_enough_path")
     }
     // 0개역 이동 (0분)
-    private let stationListToggleLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "2개역 이동 (6분)", color: .anzaGray1)
-        $0.isUserInteractionEnabled = true
-    }
-    private let stationListToggleImageView = UIImageView().then {
-        $0.image = UIImage(named: "ic_chevron_down")
-        $0.isUserInteractionEnabled = true
+    private lazy var dropdownButton = UIButton().then {
+        $0.configuration = setDropdownUI(title: "2개역 이동 (6분)", image: UIImage(named: "ic_chevron_down_path"))
+        $0.addTarget(self, action: #selector(didTapDropdownButton), for: .touchUpInside)
     }
     private let straightLine = UIView().then {
         $0.backgroundColor = .line6
     }
-    private var straightLineHeight = 80
-    private var toggled = false
-    
+    private lazy var detailPathView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .leading
+        $0.distribution = .fillEqually
+        $0.spacing = 10
+        $0.isHidden = true
+    }
+    private var isDroped = false
+    private lazy var stations: [String] = ["삼산체육관", "상동", "부천시청", "공릉", "인천", "하이루"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,27 +88,31 @@ class PathView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        configureDepatureTimeButton()
-        configureDepatureLineView()
-        configureDepatureStationLabel()
+        configureDepartureTimeButton()
+        configureDepatureIcon()
+        configureDepartureStationLabel()
         
         configureStraightLine()
         
-        configureArrivalLineView()
+        configureArrivalIcon()
         configureArrivalTimeLabel()
         configureArrivalStationLabel()
         
         configureFirstSubwayInformation()
         configureSecondSubwayInformation()
-        configureStationListToggleButton()
+        
+        configureDropdown()
+        
+        configureDetailPathView()
     }
 }
+// MARK: - configuration
 extension PathView {
     func configure(with model: [Path]) {
         
     }
     // MARK: 출발 역 관련 configure
-    func configureDepatureTimeButton() {
+    func configureDepartureTimeButton() {
         addSubview(depatureTimeButton)
         depatureTimeButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -112,36 +121,36 @@ extension PathView {
             make.height.equalTo(22)
         }
     }
-    func configureDepatureLineView() {
-        addSubview(depatureLineIcon)
-        depatureLineIcon.snp.makeConstraints { make in
+    func configureDepatureIcon() {
+        addSubview(departureIcon)
+        departureIcon.snp.makeConstraints { make in
             make.leading.equalTo(depatureTimeButton.snp.trailing).offset(12)
             make.width.height.equalTo(28)
             make.top.equalTo(depatureTimeButton)
         }
     }
-    func configureDepatureStationLabel() {
+    func configureDepartureStationLabel() {
         addSubview(depatureStationLabel)
         depatureStationLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(depatureLineIcon)
-            make.leading.equalTo(depatureLineIcon.snp.trailing).offset(12)
-            make.height.lessThanOrEqualTo(depatureLineIcon)
+            make.centerY.equalTo(departureIcon)
+            make.leading.equalTo(departureIcon.snp.trailing).offset(12)
+            make.height.lessThanOrEqualTo(departureIcon)
         }
     }
     func configureStraightLine() {
         addSubview(straightLine)
         straightLine.snp.makeConstraints { make in
-            make.centerX.equalTo(depatureLineIcon)
-            make.top.equalTo(depatureLineIcon.snp.bottom)
+            make.centerX.equalTo(departureIcon)
+            make.top.equalTo(departureIcon.snp.bottom)
             make.width.equalTo(2)
-            make.height.equalTo(straightLineHeight).priority(250)
+            make.height.equalTo(80).priority(250)
         }
     }
     // MARK: 도착역 관련 configure
-    func configureArrivalLineView() {
-        addSubview(subwayGetOutIcon)
-        subwayGetOutIcon.snp.makeConstraints { make in
-            make.centerX.equalTo(depatureLineIcon)
+    func configureArrivalIcon() {
+        addSubview(arrivalIcon)
+        arrivalIcon.snp.makeConstraints { make in
+            make.centerX.equalTo(departureIcon)
             make.top.equalTo(straightLine.snp.bottom)
             make.width.height.equalTo(28)
         }
@@ -150,20 +159,20 @@ extension PathView {
         addSubview(arrivalStationLabel)
         arrivalStationLabel.snp.makeConstraints { make in
             make.leading.equalTo(depatureStationLabel)
-            make.centerY.equalTo(subwayGetOutIcon)
+            make.centerY.equalTo(arrivalIcon)
         }
     }
     func configureArrivalTimeLabel() {
         addSubview(arrivalTimeLabel)
         arrivalTimeLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(depatureTimeButton).offset(-6)
-            make.centerY.equalTo(subwayGetOutIcon)
+            make.leading.equalToSuperview().offset(30)
+            make.centerY.equalTo(arrivalIcon)
         }
     }
     func configureFirstSubwayInformation() {
         addSubview(firstSubwayDestinationLabel)
         addSubview(firstSubwayTimeLabel)
-        addSubview(firstSubwayCongestionImageView)
+        addSubview(firstSubwayCongestionIcon)
         firstSubwayDestinationLabel.snp.makeConstraints { make in
             make.leading.equalTo(depatureStationLabel)
             make.top.equalTo(depatureStationLabel.snp.bottom).offset(4)
@@ -172,7 +181,7 @@ extension PathView {
             make.leading.equalTo(firstSubwayDestinationLabel.snp.trailing).offset(22)
             make.centerY.equalTo(firstSubwayDestinationLabel)
         }
-        firstSubwayCongestionImageView.snp.makeConstraints { make in
+        firstSubwayCongestionIcon.snp.makeConstraints { make in
             make.leading.equalTo(firstSubwayDestinationLabel.snp.trailing).offset(94)
             make.centerY.equalTo(firstSubwayDestinationLabel)
         }
@@ -180,7 +189,7 @@ extension PathView {
     func configureSecondSubwayInformation() {
         addSubview(secondSubwayDestinationLabel)
         addSubview(secondSubwayTimeLabel)
-        addSubview(secondSubwayCongestionImageView)
+        addSubview(secondSubwayCongestionIcon)
         secondSubwayDestinationLabel.snp.makeConstraints { make in
             make.leading.trailing.equalTo(firstSubwayDestinationLabel)
             make.top.equalTo(firstSubwayDestinationLabel.snp.bottom).offset(4)
@@ -189,40 +198,72 @@ extension PathView {
             make.leading.equalTo(firstSubwayTimeLabel)
             make.centerY.equalTo(secondSubwayDestinationLabel)
         }
-        secondSubwayCongestionImageView.snp.makeConstraints { make in
-            make.leading.equalTo(firstSubwayCongestionImageView)
+        secondSubwayCongestionIcon.snp.makeConstraints { make in
+            make.leading.equalTo(firstSubwayCongestionIcon)
             make.centerY.equalTo(secondSubwayDestinationLabel)
         }
     }
-    func configureStationListToggleButton() {
-        addSubview(stationListToggleImageView)
-        addSubview(stationListToggleLabel)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSubwayListToggleButton))
-        stationListToggleLabel.addGestureRecognizer(tapGesture)
-        stationListToggleImageView.addGestureRecognizer(tapGesture)
-        stationListToggleLabel.snp.makeConstraints { make in
+    func configureDropdown() {
+        addSubview(dropdownButton)
+        dropdownButton.snp.makeConstraints { make in
+            make.top.equalTo(secondSubwayDestinationLabel.snp.bottom).offset(8)
             make.leading.equalTo(depatureStationLabel)
             make.height.equalTo(19)
-            make.top.equalTo(secondSubwayDestinationLabel.snp.bottom).offset(8)
         }
-        stationListToggleImageView.snp.makeConstraints { make in
-            make.leading.equalTo(stationListToggleLabel.snp.trailing).offset(4)
-            make.centerY.equalTo(stationListToggleLabel)
-            make.width.equalTo(11)
-            make.height.equalTo(5)
+    }
+    func configureDetailPathView() {
+        detailPathView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        detailPathView.removeFromSuperview()
+        addSubview(detailPathView)
+        for station in stations {
+            let label = UILabel().then {
+                $0.attributedText = .anza_b2(text: station, color: .anzaGray1)
+            }
+            detailPathView.addArrangedSubview(label)
+            label.snp.makeConstraints { make in
+                make.height.equalTo(19)
+            }
+        }
+        detailPathView.snp.makeConstraints { make in
+            make.top.equalTo(dropdownButton.snp.bottom).offset(16)
+            make.leading.equalTo(dropdownButton)
+            make.trailing.equalToSuperview()
         }
     }
 }
-
+// MARK: - UI
 extension PathView {
-    @objc func didTapSubwayListToggleButton() {
-        toggled.toggle()
-        straightLineHeight = toggled ? 120 : 80
+    func setDepartureTimeButtonUI(title: String) -> UIButton.Configuration {
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 2,leading: 6, bottom: 4, trailing: 6)
+        config.attributedTitle = AttributedString.init(.anza_b7(text: title, color: .anzaBlack))
+        config.image = UIImage(named: "ic_chevron_down_small_path")
+        config.imagePlacement = .trailing
+        config.imagePadding = 3
+        return config
+    }
+    func setDropdownUI(title: String, image: UIImage?) -> UIButton.Configuration {
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0,leading: 0, bottom: 0, trailing: 0)
+        config.attributedTitle = AttributedString.init(.anza_b2(text: title, color: .anzaGray1))
+        config.image = image
+        config.imagePlacement = .trailing
+        config.imagePadding = 4
+        return config
+    }
+}
+// MARK: - Action function
+extension PathView {
+    @objc func didTapDropdownButton() {
+        isDroped.toggle()
+        detailPathView.isHidden = isDroped ? false : true
+        let imagePath = isDroped ? "ic_chevron_up_path" : "ic_chevron_down_path"
+        dropdownButton.configuration?.image = UIImage(named: imagePath)
         straightLine.snp.remakeConstraints { make in
-            make.centerX.equalTo(depatureLineIcon)
-            make.top.equalTo(depatureLineIcon.snp.bottom)
+            make.centerX.equalTo(departureIcon)
+            make.top.equalTo(departureIcon.snp.bottom)
             make.width.equalTo(2)
-            make.height.equalTo(straightLineHeight).priority(250)
+            make.height.equalTo(isDroped ? 118 + detailPathView.height : 80).priority(250)
         }
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
