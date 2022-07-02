@@ -10,44 +10,28 @@ import SnapKit
 import Then
 
 class PathViewController: UIViewController {
-    private let shortestTimeButton = UIButton().then {
-        $0.setAttributedTitle(.anza_b4_2(text: "최단시간", color: .anzaBlack), for: .normal)
-    }
-    private let shortestTransferButton = UIButton().then {
-        $0.setAttributedTitle(.anza_b4_2(text: "최단환승", color: .anzaBlack), for: .normal)
+    private let tabbar = TabbarView()
+    private let content = ContentView()
+    private let closeButton = UIButton().then {
+        $0.setImage(UIImage(named: "ic_xmark"), for: .normal)
     }
     private let underline = UIView().then {
         $0.backgroundColor = .anzaGray4
     }
-    private let dottedLine = UIView().then {
-        $0.backgroundColor = .gray3
-    }
     private let selectedLine = UIView().then {
         $0.backgroundColor = .anzaBlack
     }
-    private let closeButton = UIButton().then {
-        $0.setImage(UIImage(named: "ic_xmark"), for: .normal)
-    }
-    private let titleLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "소요시간", color: .anzaGray1)
-    }
-    private let timeLabel = UILabel().then {
-        $0.attributedText = .anza_t1(text: "00분", color: .anzaBlack)
-    }
-    private let depatureView = PathView()
     private var depatureViewHeight:CGFloat = 136
     private var toggled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configureControlButton()
+        
+        configureTabbar()
         configureCloseButton()
         configureUnderLine()
-        configureSelectUnderLine()
-        configureTitleLabel()
-        configureTimeLabel()
-        configureDepatureview()
+        configureContent()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -58,21 +42,20 @@ class PathViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
-
+extension PathViewController: TabbarViewDelegate {
+    func tabbarView(_ tabbar: UICollectionView, indexPath: IndexPath) {
+        
+    }
+}
 // MARK: - Configuration
 extension PathViewController {
-    func configureControlButton() {
-        view.addSubview(shortestTimeButton)
-        shortestTimeButton.addTarget(self, action: #selector(changeUnderLinePosition), for: .touchUpInside)
-        shortestTimeButton.snp.makeConstraints { make in
+    func configureTabbar() {
+        view.addSubview(tabbar)
+        tabbar.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(view.getStatusBarHeight() + 22.2)
             make.leading.equalToSuperview().offset(24)
-        }
-        view.addSubview(shortestTransferButton)
-        shortestTransferButton.addTarget(self, action: #selector(changeUnderLinePosition), for: .touchUpInside)
-        shortestTransferButton.snp.makeConstraints { make in
-            make.centerY.equalTo(shortestTimeButton)
-            make.leading.equalTo(shortestTimeButton.snp.trailing).offset(27)
+            make.width.equalTo(145)
+            make.height.equalTo(24)
         }
     }
     func configureCloseButton() {
@@ -88,57 +71,21 @@ extension PathViewController {
         view.addSubview(underline)
         underline.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(shortestTimeButton.snp.bottom).offset(10.5)
+            make.top.equalTo(tabbar.snp.bottom).offset(10.5)
             make.height.equalTo(1)
         }
     }
-    func configureSelectUnderLine() {
-        view.addSubview(selectedLine)
-        selectedLine.snp.makeConstraints { make in
-            make.top.equalTo(shortestTimeButton.snp.bottom).offset(9.5)
-            make.width.equalTo(shortestTimeButton)
-            make.height.equalTo(1)
-            make.centerX.equalTo(shortestTimeButton)
-        }
-    }
-    func configureTitleLabel() {
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(shortestTimeButton.snp.bottom).offset(33)
-            make.leading.equalToSuperview().offset(24)
-        }
-    }
-    func configureTimeLabel() {
-        view.addSubview(timeLabel)
-        timeLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(2)
-            make.leading.trailing.equalTo(titleLabel)
-        }
-    }
-    func configureDepatureview() {
-        view.addSubview(depatureView)
-        depatureView.snp.makeConstraints { make in
-            make.top.equalTo(timeLabel.snp.bottom).offset(22)
-            make.leading.trailing.equalToSuperview()
-            make.height.greaterThanOrEqualTo(depatureViewHeight)
+    func configureContent() {
+        view.addSubview(content)
+        content.snp.makeConstraints { make in
+            make.top.equalTo(underline.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
 
 // MARK: Action Function
 extension PathViewController {
-    @objc func changeUnderLinePosition() {
-        toggled.toggle()
-        selectedLine.snp.remakeConstraints { make in
-            make.top.equalTo(toggled ? shortestTransferButton.snp.bottom : shortestTimeButton.snp.bottom).offset(9.5)
-            make.width.equalTo(shortestTimeButton)
-            make.height.equalTo(1)
-            make.centerX.equalTo(toggled ? shortestTransferButton : shortestTimeButton)
-        }
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
-        }
-    }
     @objc func didTapCloseButton() {
         dismiss(animated: true)
     }
