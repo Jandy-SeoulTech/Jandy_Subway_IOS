@@ -24,11 +24,11 @@ class PathView: UIView {
     }
     /// 출발역 이름
     private let depatureStationLabel = UILabel().then {
-        $0.attributedText = .anza_b3(text: "돌곶이", color: .anzaBlack)
+        $0.attributedText = .anza_b3(text: "출발역", color: .anzaBlack)
     }
     /// 도착역 시간
     private let arrivalTimeLabel = UILabel().then {
-        $0.attributedText = .anza_b7(text: "05:29", color: .anzaGray1)
+        $0.attributedText = .anza_b7(text: "00:00", color: .anzaGray1)
     }
     /// 하차 아이콘
     private let arrivalIcon = UIImageView().then {
@@ -36,15 +36,15 @@ class PathView: UIView {
     }
     /// 하차역 이름
     private let arrivalStationLabel = UILabel().then {
-        $0.attributedText = .anza_b3(text: "태릉입구", color: .anzaBlack)
+        $0.attributedText = .anza_b3(text: "도착역", color: .anzaBlack)
     }
     /// 첫번째 기차 도착까지 남은 시간
     private let firstSubwayTimeLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "3분 43초", color: .anzaRed)
+        $0.attributedText = .anza_b2(text: "0분 00초", color: .anzaRed)
     }
     /// 첫번째 기차 목적지 정보
     private let firstSubwayDestinationLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
+        $0.attributedText = .anza_b2(text: "출발행", color: .anzaBlack)
     }
     // 첫번째 기차 혼잡도
     private let firstSubwayCongestionIcon = UIImageView().then {
@@ -52,19 +52,19 @@ class PathView: UIView {
     }
     /// 두번째 기차 도착까지 남은 시간
     private let secondSubwayTimeLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "3분 44초", color: .anzaRed)
+        $0.attributedText = .anza_b2(text: "0분 00초", color: .anzaRed)
     }
     /// 두번째 기차 목적지 정보
     private let secondSubwayDestinationLabel = UILabel().then {
-        $0.attributedText = .anza_b2(text: "봉화산행", color: .anzaBlack)
+        $0.attributedText = .anza_b2(text: "출발행", color: .anzaBlack)
     }
     // 두번째 기차 혼잡도
     private let secondSubwayCongestionIcon = UIImageView().then {
-        $0.image = UIImage(named: "ic_enough_path")
+        $0.image = UIImage(named: "ic_normal_path")
     }
     // 0개역 이동 (0분)
     private lazy var dropdownButton = UIButton().then {
-        $0.configuration = setDropdownUI(title: "2개역 이동 (6분)", image: UIImage(named: "ic_chevron_down_path"))
+        $0.configuration = setDropdownUI(title: "0개역 이동 (0분)", image: UIImage(named: "ic_chevron_down_path"))
         $0.addTarget(self, action: #selector(didTapDropdownButton), for: .touchUpInside)
     }
     private let straightLine = UIView().then {
@@ -78,7 +78,7 @@ class PathView: UIView {
         $0.isHidden = true
     }
     private var isDroped = false
-    private lazy var stations: [String] = ["삼산체육관", "상동", "부천시청", "공릉", "인천", "하이루"]
+    private lazy var stations = [String]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,7 +108,8 @@ class PathView: UIView {
 }
 // MARK: - configuration
 extension PathView {
-    func configure(with model: [Path]) {
+    func configure(with model: [String]) {
+        stations = model
         
     }
     // MARK: 출발 역 관련 configure
@@ -204,6 +205,7 @@ extension PathView {
         }
     }
     func configureDropdown() {
+        if stations.isEmpty { return }
         addSubview(dropdownButton)
         dropdownButton.snp.makeConstraints { make in
             make.top.equalTo(secondSubwayDestinationLabel.snp.bottom).offset(8)
@@ -212,21 +214,21 @@ extension PathView {
         }
     }
     func configureDetailPathView() {
+        if stations.isEmpty { return }
         detailPathView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         detailPathView.removeFromSuperview()
         addSubview(detailPathView)
         for station in stations {
-            let label = UILabel().then {
-                $0.attributedText = .anza_b2(text: station, color: .anzaGray1)
-            }
-            detailPathView.addArrangedSubview(label)
-            label.snp.makeConstraints { make in
+            let detail = DetailStationView()
+            detail.configure(name: station, color: .line6)
+            detailPathView.addArrangedSubview(detail)
+            detail.snp.makeConstraints { make in
                 make.height.equalTo(19)
             }
         }
         detailPathView.snp.makeConstraints { make in
             make.top.equalTo(dropdownButton.snp.bottom).offset(16)
-            make.leading.equalTo(dropdownButton)
+            make.leading.equalTo(departureIcon.snp.centerX).offset(-6)
             make.trailing.equalToSuperview()
         }
     }
