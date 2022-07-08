@@ -8,9 +8,9 @@
 import Foundation
 
 struct Subway: Codable {
-    let stationInfo:[Information]
+    let stationInfo:[Station]
 }
-struct Information: Codable {
+struct Station: Codable {
     let 전철역명: String
     let 호선: String
 }

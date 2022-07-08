@@ -114,6 +114,7 @@ extension MainViewController: UIScrollViewDelegate {
 extension MainViewController: SearchbarViewDelegate {
     func searchbarView(_ searchbarView: SearchbarView, didTapSearchbarAt index: Int) {
         let searchViewController = SearchViewController()
+        searchViewController.delegate = self
         searchViewController.index = index
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
