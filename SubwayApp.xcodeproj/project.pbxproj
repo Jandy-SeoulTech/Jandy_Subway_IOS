@@ -54,6 +54,8 @@
 		EE44F64A285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
 		EE44F64B285F373D00FA00FB /* NotoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */; };
 		EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */; };
+		EE8533F12877EF4800352331 /* ModalCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8533F02877EF4800352331 /* ModalCenterView.swift */; };
+		EE8533FE2877FD7800352331 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE8533FD2877FD7800352331 /* NotoSansKR-Medium.otf */; };
 		EEA2681F28683D02003DA674 /* PathCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA2681E28683D02003DA674 /* PathCard.swift */; };
 		EEA3B3D128703A06000F425D /* DetailStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3B3D028703A06000F425D /* DetailStationView.swift */; };
 		EEA3B3D7287041FF000F425D /* TabbarCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3B3D6287041FF000F425D /* TabbarCellCollectionViewCell.swift */; };
@@ -61,6 +63,10 @@
 		EEA3B3DB28708E74000F425D /* ContentViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA3B3DA28708E74000F425D /* ContentViewCollectionViewCell.swift */; };
 		EEB2C352286753A900E3561D /* PathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2C351286753A900E3561D /* PathViewController.swift */; };
 		EEB2C3562867610100E3561D /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2C3552867610100E3561D /* NSAttributedString+Extension.swift */; };
+		EEC10A3F2876FD010077360F /* StationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC10A3E2876FD010077360F /* StationModalViewController.swift */; };
+		EEC10A412876FDCD0077360F /* SubwayLineIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC10A402876FDCD0077360F /* SubwayLineIconCollectionViewCell.swift */; };
+		EEC10A44287719C50077360F /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC10A43287719C50077360F /* InformationView.swift */; };
+		EEC10A4628771A760077360F /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC10A4528771A760077360F /* Information.swift */; };
 		EEC5813C287192A0006D303E /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC5813B287192A0006D303E /* PathView.swift */; };
 		EEC5813E2871B730006D303E /* SubwaySelectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC5813D2871B730006D303E /* SubwaySelectModalViewController.swift */; };
 		EEC581432871B941006D303E /* SubwaySelectModalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC581422871B941006D303E /* SubwaySelectModalCollectionViewCell.swift */; };
@@ -126,6 +132,8 @@
 		EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.otf"; sourceTree = "<group>"; };
 		EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPopUpViewController.swift; sourceTree = "<group>"; };
+		EE8533F02877EF4800352331 /* ModalCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCenterView.swift; sourceTree = "<group>"; };
+		EE8533FD2877FD7800352331 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		EEA2681E28683D02003DA674 /* PathCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCard.swift; sourceTree = "<group>"; };
 		EEA3B3D028703A06000F425D /* DetailStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStationView.swift; sourceTree = "<group>"; };
 		EEA3B3D6287041FF000F425D /* TabbarCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -133,7 +141,10 @@
 		EEA3B3DA28708E74000F425D /* ContentViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		EEB2C351286753A900E3561D /* PathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewController.swift; sourceTree = "<group>"; };
 		EEB2C3552867610100E3561D /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
-		EEB2C3572867635300E3561D /* NotoSans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.otf"; sourceTree = "<group>"; };
+		EEC10A3E2876FD010077360F /* StationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModalViewController.swift; sourceTree = "<group>"; };
+		EEC10A402876FDCD0077360F /* SubwayLineIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLineIconCollectionViewCell.swift; sourceTree = "<group>"; };
+		EEC10A43287719C50077360F /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		EEC10A4528771A760077360F /* Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		EEC5813B287192A0006D303E /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		EEC5813D2871B730006D303E /* SubwaySelectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwaySelectModalViewController.swift; sourceTree = "<group>"; };
 		EEC581422871B941006D303E /* SubwaySelectModalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwaySelectModalCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -271,6 +282,7 @@
 		EE26262B284B9DB6002DBA5B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EEC10A42287719AD0077360F /* Common */,
 				EE090275286C4BDD00CCEC13 /* Splash */,
 				EEB2C350286752C300E3561D /* Path */,
 				EE28E1982859CE420008C5AD /* Search */,
@@ -292,7 +304,7 @@
 		EE26262F284B9E93002DBA5B /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				EEB2C3572867635300E3561D /* NotoSans-Medium.otf */,
+				EE8533FD2877FD7800352331 /* NotoSansKR-Medium.otf */,
 				EE44F645285F373D00FA00FB /* NotoSans-Regular.otf */,
 				EE44F644285F373D00FA00FB /* NotoSans-SemiBold.ttf */,
 				EE26263E284BA529002DBA5B /* Roboto-Bold.otf */,
@@ -363,10 +375,60 @@
 		EE705D2E2850E3A600A2F910 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */,
+				EE8533FC2877FB3C00352331 /* Modal */,
+				EE8533FB2877FB3400352331 /* PopUp */,
 				EEDD39B6284CDD21001244AB /* MainViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		EE8533F72877FABE00352331 /* Searchbar */ = {
+			isa = PBXGroup;
+			children = (
+				EE090270286C3F9C00CCEC13 /* SubwayMapView.swift */,
+				EE090272286C3FB100CCEC13 /* SearchbarView.swift */,
+			);
+			path = Searchbar;
+			sourceTree = "<group>";
+		};
+		EE8533F82877FAC400352331 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		EE8533F92877FAC800352331 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				EEC10A402876FDCD0077360F /* SubwayLineIconCollectionViewCell.swift */,
+				EE8533F02877EF4800352331 /* ModalCenterView.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		EE8533FA2877FB2000352331 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		EE8533FB2877FB3400352331 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				EE49C703284F6F6300EFF931 /* HistoryPopUpViewController.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		EE8533FC2877FB3C00352331 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				EEC10A3E2876FD010077360F /* StationModalViewController.swift */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 		EEB2C350286752C300E3561D /* Path */ = {
@@ -377,6 +439,15 @@
 				EE090276286C4BFF00CCEC13 /* Controller */,
 			);
 			path = Path;
+			sourceTree = "<group>";
+		};
+		EEC10A42287719AD0077360F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EEC10A43287719C50077360F /* InformationView.swift */,
+				EEC10A4528771A760077360F /* Information.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		EEDD39B5284CDD19001244AB /* Main */ = {
@@ -392,9 +463,10 @@
 		EEEAFCD828508CCC004DD527 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EEEAFCD928508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift */,
-				EE090270286C3F9C00CCEC13 /* SubwayMapView.swift */,
-				EE090272286C3FB100CCEC13 /* SearchbarView.swift */,
+				EE8533F92877FAC800352331 /* Modal */,
+				EE8533F82877FAC400352331 /* Map */,
+				EE8533FA2877FB2000352331 /* PopUp */,
+				EE8533F72877FABE00352331 /* Searchbar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -531,6 +603,7 @@
 			files = (
 				EE262646284BA529002DBA5B /* Roboto-Bold.otf in Resources */,
 				EEDD39B1284CD38E001244AB /* Images.xcassets in Resources */,
+				EE8533FE2877FD7800352331 /* NotoSansKR-Medium.otf in Resources */,
 				EE262643284BA529002DBA5B /* Roboto-Medium.otf in Resources */,
 				EE28E1A92859D03A0008C5AD /* Search.xcassets in Resources */,
 				EE262623284B9A9C002DBA5B /* Colors.xcassets in Resources */,
@@ -682,6 +755,7 @@
 			files = (
 				EEA3B3D928704404000F425D /* Tabbar.swift in Sources */,
 				EE26264E284BBD46002DBA5B /* APIService.swift in Sources */,
+				EEC10A412876FDCD0077360F /* SubwayLineIconCollectionViewCell.swift in Sources */,
 				EE262629284B9D7C002DBA5B /* UIView+Extension.swift in Sources */,
 				EE090271286C3F9C00CCEC13 /* SubwayMapView.swift in Sources */,
 				EE28E1A32859CEAE0008C5AD /* Subway.swift in Sources */,
@@ -691,10 +765,14 @@
 				EEEAFCDA28508D1E004DD527 /* HistoryPopUpCollectionViewCell.swift in Sources */,
 				EE28E1A72859CEDD0008C5AD /* SearchViewService.swift in Sources */,
 				EE49C704284F6F6300EFF931 /* HistoryPopUpViewController.swift in Sources */,
+				EEC10A44287719C50077360F /* InformationView.swift in Sources */,
 				EEA3B3DB28708E74000F425D /* ContentViewCollectionViewCell.swift in Sources */,
+				EE8533F12877EF4800352331 /* ModalCenterView.swift in Sources */,
+				EEC10A4628771A760077360F /* Information.swift in Sources */,
 				EE2E71B1286D6936003651E1 /* Path.swift in Sources */,
 				EE14BEB9281E48760073A210 /* AppDelegate.swift in Sources */,
 				EEF6F00E28524D1700FD69A8 /* History.swift in Sources */,
+				EEC10A3F2876FD010077360F /* StationModalViewController.swift in Sources */,
 				EE090273286C3FB100CCEC13 /* SearchbarView.swift in Sources */,
 				EE28E19F2859CE8E0008C5AD /* SearchViewController.swift in Sources */,
 				EEC5813C287192A0006D303E /* PathView.swift in Sources */,
