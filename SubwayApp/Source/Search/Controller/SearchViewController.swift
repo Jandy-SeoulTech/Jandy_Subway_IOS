@@ -36,15 +36,15 @@ class SearchViewController: UIViewController {
     
     var index: Int?
     var patialText: String = ""
-    var filteredData = [Information]()
-    var model = [Information]()
+    var filteredData = [Station]()
+    var model = [Station]()
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        fetchData(line: "전체")
+        fetchData(line: "all")
         dismissKeyboard()
         
         configureNavigationBar()
@@ -59,7 +59,7 @@ extension SearchViewController {
         SearchViewService.shared.getSubway(line: line) { response in
             switch response {
             case .success(let model):
-                guard let model = model as? [Information] else { return }
+                guard let model = model as? [Station] else { return }
                 self.model = model
                 self.filteredData = model
                 DispatchQueue.main.async {
