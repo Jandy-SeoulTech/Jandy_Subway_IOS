@@ -51,6 +51,16 @@ extension NSAttributedString {
                          .foregroundColor: color as Any])
         return attrString
     }
+    static func anza_b5(text: String, color: UIColor?) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrString = NSAttributedString(
+            string: text,
+            attributes: [.font: UIFont.NotoSans(.medium, size: 10) as Any,
+                         .paragraphStyle: paragraphStyle,
+                         .foregroundColor: color as Any])
+        return attrString
+    }
     static func anza_b7(text: String, color: UIColor?) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
