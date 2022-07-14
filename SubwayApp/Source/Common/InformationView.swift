@@ -21,6 +21,7 @@ class InformationView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        [destination, time, congestion].forEach { addSubview($0) }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -38,7 +39,6 @@ extension InformationView {
         congestion.image = UIImage(named: model.congestion)
     }
     func setUI() {
-        [destination, time, congestion].forEach { addSubview($0) }
         congestion.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()

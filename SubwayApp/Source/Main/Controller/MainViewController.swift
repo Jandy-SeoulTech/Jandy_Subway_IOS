@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
         $0.layer.shadowRadius = 3
         $0.layer.shadowOpacity = 1.0
         $0.layer.shadowOffset = CGSize(width: 0, height: 6)
+        $0.delegate = self
     }
     private lazy var subwayMapView = SubwayMapView()
     private var searchViewHeightConstraint = 107
@@ -36,11 +37,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        configureNavigationBar()
         configureSearchView()
         configureSubwayView()
         configureHistoryBtn()
-        configureNavigationBar()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,10 +65,8 @@ extension MainViewController {
     }
     func configureSearchView() {
         view.addSubview(searchbarView)
-        searchbarView.delegate = self
         searchbarView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(view.getStatusBarHeight())
-            //make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(searchViewHeightConstraint)
         }
@@ -104,7 +102,6 @@ extension MainViewController {
         present(popUpVC, animated: true)
     }
 }
-
 // MARK: - ScrollView Delegate
 extension MainViewController: UIScrollViewDelegate {
     

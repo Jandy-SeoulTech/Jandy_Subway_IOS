@@ -15,13 +15,13 @@ class SubwayLineIconCollectionViewCell: UICollectionViewCell {
     private let icon = UIImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(icon)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        addSubview(icon)
         icon.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalTo(24)
