@@ -43,10 +43,9 @@ struct APIService {
         provider.request(.stationInfomation(line: line, station: station)) { result in
             switch result {
             case .success(let response):
-                print(response)
                 let statusCode = response.statusCode
                 let value = response.data
-                let networkResult = judgeStatus(by: statusCode, value, type: Subway.self)
+                let networkResult = judgeStatus(by: statusCode, value, type: Station.self)
                 completion(networkResult)
             case .failure(let err):
                 debugPrint(err.localizedDescription)
