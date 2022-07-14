@@ -30,49 +30,46 @@ class SearchViewController: UIViewController {
     }
     private let lineImage = UIImageView().then {
         $0.image = UIImage(named: "ic_select")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var searchResultCollectionView: UICollectionView! = nil
     
     var index: Int?
     var patialText: String = ""
-    var filteredData = [Station]()
-    var model = [Station]()
+    var filteredData = [StationName]()
+    var model = [StationName]()
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        fetchData(line: "all")
+        fetchData()
         dismissKeyboard()
-        
+    
         configureNavigationBar()
         configureLineImage()
         configureSearchResultCollectionView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(changeLineLabel), name: Notification.Name(rawValue: "subway_line"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changeLineLabel),
+                                               name: Notification.Name(rawValue: "subway_line"), object: nil)
     }
 }
 extension SearchViewController {
-    func fetchData(line: String) {
-        SearchViewService.shared.getSubway(line: line) { response in
+    func fetchData(line: String = "all") {
+        APIService.shared.getStationInformation(at: "1호선", station: "온수") { response in
             switch response {
             case .success(let model):
-                guard let model = model as? [Station] else { return }
-                self.model = model
-                self.filteredData = model
-                DispatchQueue.main.async {
-                    self.searchResultCollectionView.reloadData()
-                }
+                guard let model = model as? Station else { return }
+                print(model)
             case .networkFail:
                 print("network fail")
-            case .requestErr(let error):
-                print(error)
+            case .requestErr:
+                print("request error")
             case .pathErr:
                 print("path error")
             default:
-                print("error")
+                print("networkFail")
             }
         }
     }
@@ -183,8 +180,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SubwayLineCollectionViewCell.identifier,
             for: indexPath) as? SubwayLineCollectionViewCell else {
-                return UICollectionViewCell()
-            }
+            return UICollectionViewCell()
+        }
         cell.layer.addBottomBorder(x: 60, color: .anzaGray4!, width: 1)
         cell.configure(with: filteredData[indexPath.row])
         return cell

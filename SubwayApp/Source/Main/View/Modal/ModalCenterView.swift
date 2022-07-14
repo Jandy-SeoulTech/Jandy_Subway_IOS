@@ -10,34 +10,35 @@ import SnapKit
 import Then
 
 class ModalCenterView: UIView {
-    let centerbar = UIView().then {
+    private lazy var centerbar = UIView().then {
         $0.layer.cornerRadius = 10
         $0.backgroundColor = .line1
     }
-    let currentStationView = UIView().then {
+    private lazy var currentStationView = UIView().then {
         $0.layer.cornerRadius = 18.5
         $0.backgroundColor = .white
         $0.layer.borderWidth = 3
         $0.layer.borderColor = UIColor.line1?.cgColor
     }
-    let currentStation = UILabel().then {
+    private lazy var currentStation = UILabel().then {
         $0.attributedText = .anza_b3(text: "현재역", color: .black)
     }
-    let prevStation = UILabel().then {
+    private lazy var prevStation = UILabel().then {
         $0.attributedText = .anza_b5(text: "이전역", color: .white)
     }
-    let nextStation = UILabel().then {
+    private lazy var nextStation = UILabel().then {
         $0.attributedText = .anza_b5(text: "다음역", color: .white)
     }
-    let prevIcon = UIImageView().then {
+    private lazy var prevIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_chevron_left_white")
     }
-    let nextIcon = UIImageView().then {
+    private lazy var nextIcon = UIImageView().then {
         $0.image = UIImage(named: "ic_chevron_right_white")
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        [centerbar, currentStationView, currentStation].forEach { addSubview($0) }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -56,7 +57,6 @@ extension ModalCenterView {
         nextStation.attributedText = .anza_b5(text: next, color: .white)
     }
     func configureLayout() {
-        [centerbar, currentStationView, currentStation].forEach { addSubview($0) }
         currentStationView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.centerX.equalToSuperview()

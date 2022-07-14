@@ -41,7 +41,7 @@ class SubwayLineCollectionViewCell: UICollectionViewCell {
 
 // MARK: Configure Cell
 extension SubwayLineCollectionViewCell {
-    func configure(with model: Station) {
+    func configure(with model: StationName) {
         let icname = "ic_" + LineInformation.shared.convertIcName(name: model.호선) + "_circle"
         numberImage.image = UIImage(named: icname)
         nameLabel.text = model.전철역명

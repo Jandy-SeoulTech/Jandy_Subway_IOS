@@ -15,50 +15,54 @@ protocol SearchbarViewDelegate: AnyObject {
 class SearchbarView: UIView {
     weak var delegate: SearchbarViewDelegate?
     
-    private let flipButton = UIButton().then {
+    private lazy var flipButton = UIButton().then {
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "ic_flip"), for: .normal)
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addTarget(self, action: #selector(didTapFlipButton), for: .touchUpInside)
     }
     private let busButton = UIButton().then {
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "ic_bus"), for: .normal)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     /// Chips: 지금 탑승 중인 열차가 있어요.
     private let chips = UIButton().then {
         $0.backgroundColor = .anzaBlack?.withAlphaComponent(0.85)
         $0.layer.cornerRadius = 20
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private var departureSearchbar = UIButton().then {
+    private lazy var departureSearchbar = UIButton().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.configuration = searchbarConfig(text: "출발 역명을 검색해주세요.", color: .anzaGray2)
+        $0.addTarget(self, action: #selector(didTapDepartureButton), for: .touchUpInside)
     }
-    private var transferSearchbar = UIButton().then {
+    private lazy var transferSearchbar = UIButton().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isHidden = true
+        $0.configuration = searchbarConfig(text: "환승 역명을 검색해주세요.", color: .anzaGray2)
+        $0.addTarget(self, action: #selector(didTapTransferButton), for: .touchUpInside)
     }
-    private var arrivalSearchbar = UIButton().then {
+    private lazy var arrivalSearchbar = UIButton().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.anzaGray1?.cgColor
         $0.layer.cornerRadius = 4
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.configuration = searchbarConfig(text: "도착 역명을 검색해주세요.", color: .anzaGray2)
+        $0.addTarget(self, action: #selector(didTapArrivalButton), for: .touchUpInside)
     }
     private let searchbarSV = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 8
-        $0.distribution = .fillProportionally
+        $0.distribution = .fillEqually
         $0.alignment = .center
         $0.isUserInteractionEnabled = true
-        $0.translatesAutoresizingMaskIntoConstraints = true;
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(flipButton)
+        addSubview(busButton)
+        addSubview(searchbarSV)
     }
     required init?(coder: NSCoder) {
         fatalError("SearchbarView init(coder:) has not been implemented")
@@ -75,22 +79,21 @@ class SearchbarView: UIView {
 //MARK: - Configuration
 extension SearchbarView {
     func configureFlipButton() {
-        addSubview(flipButton)
-        flipButton.addTarget(self, action: #selector(didTapFlipButton), for: .touchUpInside)
         flipButton.snp.makeConstraints { make in
-            make.centerY.equalTo(searchbarSV.snp.centerY)
+            make.centerY.equalTo(searchbarSV)
             make.leading.equalToSuperview().offset(12)
         }
     }
     func configureBusButton() {
-        addSubview(busButton)
         busButton.snp.makeConstraints { make in
-            make.centerY.equalTo(departureSearchbar.snp.centerY)
+            make.centerY.equalTo(departureSearchbar)
             make.leading.equalTo(departureSearchbar.snp.trailing).offset(8)
         }
     }
     func configureSearchbarSV() {
-        addSubview(searchbarSV)
+        searchbarSV.addArrangedSubview(departureSearchbar)
+        searchbarSV.addArrangedSubview(transferSearchbar)
+        searchbarSV.addArrangedSubview(arrivalSearchbar)
         searchbarSV.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(44)
             make.trailing.equalToSuperview().offset(-51)
@@ -98,20 +101,14 @@ extension SearchbarView {
             make.bottom.equalToSuperview().offset(-10)
         }
         
-        searchbarSV.addArrangedSubview(departureSearchbar)
-        departureSearchbar.addTarget(self, action: #selector(didTapDepartureButton), for: .touchUpInside)
-        departureSearchbar.configuration = searchbarConfig(text: "출발 역명을 검색해주세요.", color: .anzaGray2)
         departureSearchbar.snp.makeConstraints { make in
             make.width.equalTo(width - 95)
-            make.height.equalTo(41)
         }
-        
-        searchbarSV.addArrangedSubview(arrivalSearchbar)
-        arrivalSearchbar.addTarget(self, action: #selector(didTapArrivalButton), for: .touchUpInside)
-        arrivalSearchbar.configuration = searchbarConfig(text: "도착 역명을 검색해주세요.", color: .anzaGray2)
+        transferSearchbar.snp.makeConstraints { make in
+            make.width.equalTo(width - 95)
+        }
         arrivalSearchbar.snp.makeConstraints { make in
             make.width.equalTo(width - 95)
-            make.height.equalTo(41)
         }
     }
     func configureChips() {

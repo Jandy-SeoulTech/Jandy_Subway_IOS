@@ -12,10 +12,10 @@ import Then
 class SubwayMapView: UIScrollView {
     private let subwayMap = UIImageView().then {
         $0.image = UIImage(named: "subway_map")
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(subwayMap)
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +35,6 @@ extension SubwayMapView {
         showsHorizontalScrollIndicator = false
     }
     func configureSubwayMap() {
-        addSubview(subwayMap)
         subwayMap.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }

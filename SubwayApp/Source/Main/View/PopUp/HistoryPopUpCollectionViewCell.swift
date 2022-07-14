@@ -13,24 +13,21 @@ class HistoryPopUpCollectionViewCell: UICollectionViewCell {
     static let identifier = "HistoryPopUpCollectionViewCell"
     
     private var depatureConstraint: SnapKit.ConstraintItem?
-    private let depatureLabel = UILabel().then {
+    private lazy var depatureLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .NotoSans(.regular, size: 14)
         $0.textColor = .anzaBlack
         $0.textAlignment = .center
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private let arrow = UIImageView(image: UIImage(named: "ic_arrow_right")?.withRenderingMode(.alwaysTemplate)).then {
+    private lazy var arrow = UIImageView(image: UIImage(named: "ic_arrow_right")?.withRenderingMode(.alwaysTemplate)).then {
         $0.tintColor = .anzaDarkGray
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private var arrivalConstraint: SnapKit.ConstraintItem?
-    private let arrivalLabel = UILabel().then {
+    private lazy var arrivalLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .NotoSans(.regular, size: 14)
         $0.textColor = .anzaBlack
         $0.textAlignment = .center
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
