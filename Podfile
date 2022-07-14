@@ -6,10 +6,10 @@ target 'SubwayApp' do
   use_frameworks!
 
   # Pods for SubwayApp
-  pod 'Then'
-  pod 'Alamofire'
-  pod 'SnapKit' 
-  
+  pod 'Then', '~> 3.0'
+  pod 'SnapKit', '~> 5.6'
+  pod 'Moya', '~> 15.0'
+
   target 'SubwayAppTests' do
     inherit! :search_paths
     # Pods for testing
