@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import Then
 
-class DetailStationView: UIView {
-    let station = UILabel().then {
+class DetailPathView: UIView {
+    private lazy var station = UILabel().then {
         $0.attributedText = .anza_b2(text: "station", color: .anzaGray1)
     }
-    let circle = UIView().then {
+    private lazy var circle = UIView().then {
         $0.backgroundColor = .white
         $0.layer.borderColor = UIColor.line1?.cgColor
         $0.layer.borderWidth = 2
@@ -21,6 +21,10 @@ class DetailStationView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(circle)
+        addSubview(station)
+        configureCircle()
+        configureStation()
     }
     
     required init?(coder: NSCoder) {
@@ -28,26 +32,22 @@ class DetailStationView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .clear
-        configureCircle()
-        configureStation()
-        
     }
 }
-extension DetailStationView {
+
+// MARK: - Configuration
+extension DetailPathView {
     func configure(name: String, color: UIColor?) {
         station.attributedText = .anza_b2(text: name, color: .anzaGray1)
         circle.layer.borderColor = color?.cgColor
     }
     func configureCircle() {
-        addSubview(circle)
         circle.snp.makeConstraints { make in
             make.leading.centerY.equalToSuperview()
             make.width.height.equalTo(12)
         }
     }
     func configureStation() {
-        addSubview(station)
         station.snp.makeConstraints { make in
             make.leading.equalTo(circle.snp.trailing).offset(20)
             make.centerY.equalTo(circle)

@@ -57,11 +57,15 @@ class SearchViewController: UIViewController {
 }
 extension SearchViewController {
     func fetchData(line: String = "all") {
-        APIService.shared.getStationInformation(at: "1호선", station: "온수") { response in
+        APIService.shared.getStationList(at: line) { [weak self] response in
             switch response {
             case .success(let model):
-                guard let model = model as? Station else { return }
-                print(model)
+                guard let model = model as? Subway else { return }
+                self?.model = model.stationInfo
+                self?.filteredData = model.stationInfo
+                DispatchQueue.main.async {
+                    self?.searchResultCollectionView.reloadData()
+                }
             case .networkFail:
                 print("network fail")
             case .requestErr:

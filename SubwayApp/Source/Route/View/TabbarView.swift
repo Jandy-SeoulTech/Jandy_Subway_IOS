@@ -10,41 +10,45 @@ import SnapKit
 import Then
 
 protocol TabbarViewDelegate: AnyObject {
-    func tabbarView(_ tabbar: UICollectionView, indexPath: IndexPath)
+    func tabbarView(_ tabbar: UICollectionView, index: Int)
 }
 class TabbarView: UIView {
     weak var delegate: TabbarViewDelegate?
-    lazy var tabbar = UICollectionView(frame: .zero,
-                                       collectionViewLayout: layout()).then {
-        $0.delegate = self
-        $0.dataSource = self
-        $0.register(TabbarCellCollectionViewCell.self,
-                    forCellWithReuseIdentifier: TabbarCellCollectionViewCell.identifier)
-    }
-    
+    private lazy var tabbar = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: layout()).then {
+            $0.delegate = self
+            $0.dataSource = self
+            $0.register(TabbarViewCell.self,
+                        forCellWithReuseIdentifier: TabbarViewCell.identifier)
+        }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(tabbar)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func layoutSubviews() {
-        addSubview(tabbar)
         tabbar.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }
 
-extension TabbarView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+// MARK: - CollectionView Delegate, DataSource
+extension TabbarView: UICollectionViewDelegate,
+                  UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return 2
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TabbarCellCollectionViewCell.identifier,
-            for: indexPath) as? TabbarCellCollectionViewCell else {
+            withReuseIdentifier: TabbarViewCell.identifier,
+            for: indexPath) as? TabbarViewCell else {
             return UICollectionViewCell()
         }
         if indexPath.row == 0 {
@@ -54,9 +58,13 @@ extension TabbarView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        delegate?.tabbarView(collectionView, indexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let fisrtCellIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: fisrtCellIndexPath, animated: false, scrollPosition: [])
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        delegate?.tabbarView(collectionView, index: indexPath.row)
     }
     func layout() -> UICollectionViewCompositionalLayout {
         let item = NSCollectionLayoutItem(

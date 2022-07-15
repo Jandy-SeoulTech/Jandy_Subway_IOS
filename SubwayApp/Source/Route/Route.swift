@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Path: Codable {
+struct Route: Codable {
     let departureStation: String
     let departureTime: String
     let arrivalStation: String
