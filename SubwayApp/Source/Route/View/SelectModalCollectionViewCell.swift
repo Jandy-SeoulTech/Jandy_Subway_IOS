@@ -1,5 +1,5 @@
 //
-//  SubwaySelectModalCollectionViewCell.swift
+//  SelectModalCollectionViewCell.swift
 //  SubwayApp
 //
 //  Created by 김영균 on 2022/07/03.
@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-class SubwaySelectModalCollectionViewCell: UICollectionViewCell {
-    static let identifier = "SubwaySelectModalCollectionViewCell"
+class SelectModalCollectionViewCell: UICollectionViewCell {
+    static let identifier = "SelectModalCollectionViewCell"
     
     private let currentTimeLabel = UILabel().then {
         $0.attributedText = .anza_b3(text: "오후 00:00", color: .anzaBlack)
@@ -34,17 +34,16 @@ class SubwaySelectModalCollectionViewCell: UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUI()
+        setConstraints()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override func layoutSubviews() {
-        setUI()
-    }
 }
 
 // MARK: - Configuration
-extension SubwaySelectModalCollectionViewCell {
+extension SelectModalCollectionViewCell {
     func configure(currentTime: String, desination: String,
                    remainTime: String, line: UIImage, congestion: UIImage) {
         currentTimeLabel.attributedText = .anza_b3(text: currentTime, color: .anzaBlack)
@@ -55,26 +54,28 @@ extension SubwaySelectModalCollectionViewCell {
     }
     func setUI() {
         addSubview(currentTimeLabel)
+        addSubview(destinationLabel)
+        addSubview(remainTimeLabel)
+        addSubview(congestionIcon)
+        addSubview(lineIcon)
+    }
+    func setConstraints() {
         currentTimeLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(24)
         }
-        addSubview(destinationLabel)
         destinationLabel.snp.makeConstraints { make in
             make.centerY.equalTo(currentTimeLabel)
             make.leading.equalTo(currentTimeLabel.snp.trailing).offset(13)
         }
-        addSubview(remainTimeLabel)
         remainTimeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(currentTimeLabel)
             make.leading.equalTo(destinationLabel.snp.trailing).offset(31)
         }
-        addSubview(congestionIcon)
         congestionIcon.snp.makeConstraints { make in
             make.centerY.equalTo(currentTimeLabel)
             make.leading.equalTo(remainTimeLabel.snp.trailing).offset(9)
         }
-        addSubview(lineIcon)
         lineIcon.snp.makeConstraints { make in
             make.centerY.equalTo(currentTimeLabel)
             make.leading.equalTo(congestionIcon.snp.trailing).offset(31)

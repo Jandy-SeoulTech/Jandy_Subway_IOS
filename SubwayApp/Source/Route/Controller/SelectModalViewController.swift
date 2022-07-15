@@ -1,5 +1,5 @@
 //
-//  SubwaySelectModalViewController.swift
+//  SelectModalViewController.swift
 //  SubwayApp
 //
 //  Created by 김영균 on 2022/07/03.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SubwaySelectModalViewController: UIViewController {
+class SelectModalViewController: UIViewController {
     private let dimmedAlpha: CGFloat = 0.3
     private lazy var dimmedView = UIView().then {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.3)
@@ -36,8 +36,8 @@ class SubwaySelectModalViewController: UIViewController {
             $0.dataSource = self
             $0.showsVerticalScrollIndicator = false
             $0.isScrollEnabled = false
-            $0.register(SubwaySelectModalCollectionViewCell.self,
-                        forCellWithReuseIdentifier: SubwaySelectModalCollectionViewCell.identifier)
+            $0.register(SelectModalCollectionViewCell.self,
+                        forCellWithReuseIdentifier: SelectModalCollectionViewCell.identifier)
         }
     
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class SubwaySelectModalViewController: UIViewController {
 }
 
 // MARK: - Configuration
-extension SubwaySelectModalViewController {
+extension SelectModalViewController {
     func configureDimmedView() {
         view.addSubview(dimmedView)
         dimmedView.snp.makeConstraints { make in
@@ -107,7 +107,7 @@ extension SubwaySelectModalViewController {
 }
 
 // MARK: - CollectionView Delegate, DataSource
-extension SubwaySelectModalViewController: UICollectionViewDelegate,
+extension SelectModalViewController: UICollectionViewDelegate,
                                            UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
@@ -120,8 +120,8 @@ extension SubwaySelectModalViewController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SubwaySelectModalCollectionViewCell.identifier,
-            for: indexPath) as? SubwaySelectModalCollectionViewCell
+            withReuseIdentifier: SelectModalCollectionViewCell.identifier,
+            for: indexPath) as? SelectModalCollectionViewCell
         else { return UICollectionViewCell() }
         cell.configure(currentTime: "오후 05:23",
                        desination: "봉화산행",
@@ -133,14 +133,14 @@ extension SubwaySelectModalViewController: UICollectionViewDelegate,
 }
 
 // MARK: - Action Function
-extension SubwaySelectModalViewController {
+extension SelectModalViewController {
     @objc func dismissModal() {
         animateDismissView()
     }
 }
 
 // MARK: - Animation Function
-extension SubwaySelectModalViewController {
+extension SelectModalViewController {
     func animateShowDimmedView() {
         dimmedView.alpha = 0
         UIView.animate(withDuration: 0.4) {
